@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📐 Dividing Polynomials by Monomials - رياضيات 12 عام | Mr. Mohammed Hesham</title>
+<meta name="description" content="امتحان تفاعلي عن قسمة كثيرات الحدود باستخدام القسمة المطولة - صف 12 عام">
+<meta name="author" content="Mr. Mohammed Hesham">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Cairo', sans-serif; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); }
+body.en-mode { font-family: 'Inter', sans-serif; direction: ltr; }
+.arabic-math { font-family: 'Amiri', 'Cairo', serif; }
+.correct { background-color: #dcfce7 !important; border-color: #16a34a !important; }
+.incorrect { background-color: #fee2e2 !important; border-color: #dc2626 !important; }
+.timer-warning { color: #dc2626 !important; animation: pulse 1s infinite; }
+@keyframes pulse { 50% { opacity: 0.7; } }
+@media print { .no-print { display: none !important; } }
+.success-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.875rem; }
+.grade-excellent { background: #dcfce7; color: #166534; }
+.grade-good { background: #fef3c7; color: #92400e; }
+.grade-pass { background: #dbeafe; color: #1e40af; }
+.grade-fail { background: #fee2e2; color: #991b1b; }
+.lang-switch { position: fixed; top: 16px; left: 16px; z-index: 100; background: white; padding: 6px; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); display: flex; gap: 4px; border: 2px solid #d97706; }
+body.en-mode .lang-switch { left: auto; right: 16px; }
+.lang-btn { padding: 6px 14px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: all 0.3s; border: none; font-size: 0.875rem; background: transparent; color: #6b7280; }
+.lang-btn.active { background: #d97706; color: white; box-shadow: 0 2px 6px rgba(217,119,6,0.4); }
+.shuffle-badge { display: inline-block; background: linear-gradient(135deg, #d97706, #b45309); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; margin-right: 8px; }
+body.en-mode .shuffle-badge { margin-right: 0; margin-left: 8px; }
+.math-display { display: inline-block; direction: ltr; font-family: 'Amiri', serif; font-size: 1.1em; padding: 2px 6px; background: #fef3c7; border-radius: 4px; margin: 2px; color: #92400e; font-weight: 600; }
+.save-indicator { position: fixed; bottom: 20px; left: 20px; z-index: 200; background: #10b981; color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+body.en-mode .save-indicator { left: auto; right: 20px; }
+.save-indicator.show { opacity: 1; }
+.formula-box { background: #fef3c7; border: 2px solid #f59e0b; border-radius: 8px; padding: 12px; margin: 10px 0; font-family: 'Amiri', serif; direction: ltr; text-align: center; }
+.svg-graph { display: block; margin: 12px auto; background: white; border: 2px solid #e5e7eb; border-radius: 12px; padding: 8px; max-width: 100%; }
+.graph-container { text-align: center; margin: 10px 0; }
+.module-badge { display: inline-block; padding: 4px 16px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; margin-bottom: 8px; }
+.module-1 { background: #fef3c7; color: #92400e; }
+.module-2 { background: #dbeafe; color: #1e40af; }
+.module-3 { background: #fce7f3; color: #9f1239; }
+.module-4 { background: #ecfdf5; color: #065f46; }
+.module-5 { background: #ede9fe; color: #5b21b6; }
+.module-6 { background: #fee2e2; color: #991b1b; }
+</style>
+</head>
+<body class="p-4 md:p-8 min-h-screen">
+
+<div class="lang-switch no-print">
+<button class="lang-btn active" onclick="setLanguage('ar')" id="btn-ar">عربي</button>
+<button class="lang-btn" onclick="setLanguage('en')" id="btn-en">EN</button>
+</div>
+
+<div id="saveIndicator" class="save-indicator">💾 <span data-ar="تم الحفظ" data-en="Saved">تم الحفظ</span></div>
+
+<div id="timer-container" class="max-w-5xl mx-auto mb-4 text-center no-print">
+<div class="bg-white p-4 rounded-2xl shadow-lg inline-block border-2 border-amber-100">
+<span class="text-gray-600 ml-2">⏰ <span data-ar="الوقت المتبقي:" data-en="Time Left:">الوقت المتبقي:</span></span>
+<span id="timer" class="text-2xl font-bold text-amber-700 font-mono">60:00</span>
+<span class="shuffle-badge">📐 <span data-ar="قسمة كثيرات الحدود" data-en="Dividing Polynomials">قسمة كثيرات الحدود</span> - 30 <span data-ar="سؤال" data-en="Questions">سؤال</span></span>
+</div>
+</div>
+
+<div class="max-w-5xl mx-auto mb-6 flex flex-wrap gap-3 justify-center no-print">
+<button onclick="toggleAnswers()" class="bg-amber-700 hover:bg-amber-800 text-white px-5 py-2 rounded-xl font-medium transition shadow">👀 <span data-ar="إظهار/إخفاء الإجابات" data-en="Show/Hide Answers">إظهار/إخفاء الإجابات</span></button>
+<button onclick="window.print()" class="bg-gray-700 hover:bg-gray-900 text-white px-5 py-2 rounded-xl font-medium transition shadow">🖨️ <span data-ar="طباعة" data-en="Print">طباعة</span></button>
+<button onclick="reshuffleExam()" class="bg-gradient-to-r from-amber-700 to-orange-600 hover:from-amber-800 hover:to-orange-700 text-white px-5 py-2 rounded-xl font-medium transition shadow">🔄 <span data-ar="أسئلة جديدة" data-en="New Questions">أسئلة جديدة</span></button>
+<button onclick="clearProgress()" class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-xl font-medium transition shadow">🗑️ <span data-ar="مسح التقدم" data-en="Clear Progress">مسح التقدم</span></button>
+</div>
+
+<header class="max-w-5xl mx-auto bg-white p-8 rounded-3xl shadow-2xl mb-8 border-4 border-amber-500">
+<div class="text-center">
+<div class="inline-block bg-amber-700 text-white px-6 py-2 rounded-full text-sm font-bold mb-4">MATH GRADE 12 GENERAL - QUESTION 13</div>
+<h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">📐 <span data-ar="قسمة كثيرات الحدود باستخدام القسمة المطولة" data-en="Dividing Polynomials Using Long Division">قسمة كثيرات الحدود باستخدام القسمة المطولة</span></h1>
+<h2 class="text-xl text-amber-700 font-semibold mb-2"><span data-ar="رياضيات صف 12 عام - ص 105 (مثال 1)" data-en="Grade 12 General - Page 105 (Example 1)">رياضيات صف 12 عام - ص 105 (مثال 1)</span></h2>
+<p class="text-gray-600 mb-4"><span data-ar="Dividing Polynomials by Monomials & Simplifying Expressions" data-en="Dividing Polynomials by Monomials & Simplifying Expressions">قسمة كثيرات الحدود على وحيد الحد وتبسيط التعابير</span></p>
+<p class="text-sm text-green-600 font-semibold">💾 <span data-ar="يتم حفظ تقدمك تلقائياً - 30 سؤالاً في 6 أقسام" data-en="Your progress is auto-saved - 30 questions in 6 sections">يتم حفظ تقدمك تلقائياً - 30 سؤالاً في 6 أقسام</span></p>
+</div>
+<div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-gray-600">
+<span>📅 <span data-ar="التاريخ:" data-en="Date:">التاريخ:</span> <input type="text" id="examDate" class="border-b-2 border-amber-300 bg-transparent w-32 text-center"></span>
+<span>😊 <span data-ar="الاسم:" data-en="Name:">الاسم:</span> <input type="text" id="studentName" class="border-b-2 border-amber-300 bg-transparent w-40 text-center" data-placeholder-ar="اكتب اسمك" data-placeholder-en="Your name" placeholder="اكتب اسمك"></span>
+<span>🏫 <span data-ar="الشعبة:" data-en="Class:">الشعبة:</span> <input type="text" id="studentClass" class="border-b-2 border-amber-300 bg-transparent w-32 text-center" data-placeholder-ar="الشعبة" data-placeholder-en="Class" placeholder="الشعبة"></span>
+<span>⏰ <span data-ar="المدة: 60 دقيقة" data-en="Duration: 60 min">المدة: 60 دقيقة</span></span>
+<span>📊 <span data-ar="المجموع: 100 درجة" data-en="Total: 100 points">المجموع: 100 درجة</span></span>
+</div>
+</header>
+
+<div class="max-w-5xl mx-auto mb-6 bg-white p-4 rounded-xl shadow-lg border-2 border-amber-200 no-print">
+<h3 class="font-bold text-lg mb-3 text-amber-800 text-center">📐 <span data-ar="قواعد قسمة كثيرات الحدود على وحيد الحد" data-en="Rules for Dividing Polynomials by Monomials">قواعد قسمة كثيرات الحدود على وحيد الحد</span></h3>
+<div class="grid md:grid-cols-3 gap-3 text-sm">
+<div class="formula-box">
+<strong><span data-ar="قاعدة القسمة:" data-en="Division Rule:">قاعدة القسمة:</span></strong><br>
+<span class="math-display">(a + b + c) ÷ d = a/d + b/d + c/d</span><br>
+<span data-ar="اقسم كل حد على المقام" data-en="Divide each term by denominator">اقسم كل حد على المقام</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="قاعدة الأسس:" data-en="Exponent Rule:">قاعدة الأسس:</span></strong><br>
+<span class="math-display">xᵐ ÷ xⁿ = xᵐ⁻ⁿ</span><br>
+<span data-ar="اطرح الأسس عند القسمة" data-en="Subtract exponents when dividing">اطرح الأسس عند القسمة</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="الأس السالب:" data-en="Negative Exponent:">الأس السالب:</span></strong><br>
+<span class="math-display">x⁻ⁿ = 1/xⁿ</span><br>
+<span data-ar="(3xy)⁻¹ = 1/(3xy)" data-en="(3xy)⁻¹ = 1/(3xy)">(3xy)⁻¹ = 1/(3xy)</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="تبسيط المعاملات:" data-en="Simplify Coefficients:">تبسيط المعاملات:</span></strong><br>
+<span class="math-display">12/4 = 3, 18/6 = 3</span><br>
+<span data-ar="اقسم الأعداد أولاً" data-en="Divide numbers first">اقسم الأعداد أولاً</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="المتغيرات:" data-en="Variables:">المتغيرات:</span></strong><br>
+<span data-ar="x²y ÷ xy = x" data-en="x²y ÷ xy = x">x²y ÷ xy = x</span><br>
+<span data-ar="اطرح أسس كل متغير" data-en="Subtract exponents of each variable">اطرح أسس كل متغير</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="التحقق:" data-en="Verification:">التحقق:</span></strong><br>
+<span data-ar="الناتج × المقام = المقسوم" data-en="Quotient × Divisor = Dividend">الناتج × المقام = المقسوم</span><br>
+<span class="math-display">(2x)(3xy) = 6x²y ✓</span>
+</div>
+</div>
+</div>
+
+<main class="max-w-5xl mx-auto space-y-8" id="exam-content"></main>
+
+<div class="text-center no-print pb-8 mt-8">
+<button onclick="gradeExam()" class="bg-gradient-to-r from-amber-700 to-orange-600 hover:from-amber-800 hover:to-orange-700 text-white text-lg px-12 py-4 rounded-2xl font-bold shadow-xl transition transform hover:scale-105">🎯 <span data-ar="صحح إجاباتي!" data-en="Grade My Exam!">صحح إجاباتي!</span></button>
+</div>
+
+<div id="results-panel" class="max-w-5xl mx-auto mt-8 bg-white p-8 rounded-3xl shadow-2xl border-4 border-amber-500 hidden no-print">
+<h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">🏆 <span data-ar="نتيجتك يا بطل!" data-en="Your Result, Champion!">نتيجتك يا بطل!</span> 🏆</h2>
+<div class="grid md:grid-cols-3 gap-4 mb-6">
+<div class="bg-amber-50 p-4 rounded-xl text-center"><p>😊 <span data-ar="الاسم" data-en="Name">الاسم</span></p><p id="res-name" class="font-bold text-xl text-amber-700">-</p></div>
+<div class="bg-orange-50 p-4 rounded-xl text-center"><p>📅 <span data-ar="التاريخ" data-en="Date">التاريخ</span></p><p id="res-date" class="font-bold text-xl text-orange-700">-</p></div>
+<div class="bg-amber-50 p-4 rounded-xl text-center"><p>🌟 <span data-ar="المجموع" data-en="Total">المجموع</span></p><p id="res-total" class="font-bold text-3xl text-amber-700">0 / 100</p></div>
+</div>
+<div class="text-center mb-6">
+<span id="success-badge" class="success-badge grade-excellent">-</span>
+<p id="success-percent" class="text-4xl font-bold text-amber-700 mt-2">0%</p>
+<p class="text-sm text-gray-500"><span data-ar="نسبة النجاح" data-en="Success Rate">نسبة النجاح</span></p>
+</div>
+<div class="bg-gray-50 p-6 rounded-xl mb-6">
+<h3 class="font-bold text-lg mb-4 text-gray-800">📊 <span data-ar="أداؤك في كل قسم:" data-en="Your Performance by Section:">أداؤك في كل قسم:</span></h3>
+<div class="space-y-3" id="sections-performance"></div>
+</div>
+<div class="text-center">
+<button id="sendEmailBtn" onclick="sendResultsToEmail()" class="bg-gradient-to-r from-amber-700 to-orange-600 text-white text-lg px-8 py-3 rounded-2xl font-bold shadow-xl transition">📧 <span data-ar="أرسل النتيجة للمعلم" data-en="Send Result to Teacher">أرسل النتيجة للمعلم</span></button>
+<p id="emailStatus" class="text-sm mt-2 text-center font-medium"></p>
+</div>
+</div>
+
+<footer class="max-w-5xl mx-auto mt-10 mb-8 text-center text-gray-500 text-sm no-print">
+© Dividing Polynomials - Grade 12 General | Mr. Mohammed Hesham 📐
+</footer>
+
+<script>
+const PUBLIC_KEY = "Rb3Lq8tXaFmc5YHUH";
+const SERVICE_ID = "service_w15m64i";
+const TEMPLATE_ID = "template_5b0u2tq";
+const TARGET_EMAIL = "mohammedhesham872@gmail.com";
+emailjs.init(PUBLIC_KEY);
+
+const STORAGE_KEY = 'dividing_polynomials_grade12_v1';
+const TOTAL_TIME = 3600;
+const TOTAL_QUESTIONS = 30;
+const TOTAL_SECTIONS = 6;
+const QUESTIONS_PER_SECTION = 5;
+
+let currentSeed = null;
+let answersVisible = false;
+let saveIndicatorTimeout = null;
+let currentLang = 'ar';
+let timeRemaining = TOTAL_TIME;
+let timerInterval;
+let examData;
+let correctAnswersMap = {};
+let rng = null;
+
+function mulberry32(a) {
+    return function() {
+        var t = a += 0x6D2B79F5;
+        t = Math.imul(t ^ t >>> 15, t | 1);
+        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    }
+}
+
+function showSaveIndicator() {
+    const indicator = document.getElementById('saveIndicator');
+    indicator.classList.add('show');
+    if (saveIndicatorTimeout) clearTimeout(saveIndicatorTimeout);
+    saveIndicatorTimeout = setTimeout(() => indicator.classList.remove('show'), 1500);
+}
+
+function saveState(showIndicator = true) {
+    try {
+        const state = {
+            seed: currentSeed, lang: currentLang,
+            studentName: document.getElementById('studentName').value,
+            studentClass: document.getElementById('studentClass').value,
+            examDate: document.getElementById('examDate').value,
+            answers: getSelectedAnswers(),
+            timeRemaining: timeRemaining,
+            answersVisible: answersVisible, savedAt: Date.now()
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        if (showIndicator) showSaveIndicator();
+    } catch (e) { console.error('Save error:', e); }
+}
+
+function loadState() {
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        return saved ? JSON.parse(saved) : null;
+    } catch (e) { return null; }
+}
+
+function getSelectedAnswers() {
+    const answers = {};
+    for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+        const selected = document.querySelector('input[name="q'+i+'"]:checked');
+        if (selected) answers[i] = selected.value;
+    }
+    return answers;
+}
+
+function restoreAnswers(answers) {
+    if (!answers) return;
+    for (const [idx, val] of Object.entries(answers)) {
+        const radio = document.querySelector('input[name="q'+idx+'"][value="'+val+'"]');
+        if (radio) radio.checked = true;
+    }
+}
+
+function clearProgress() {
+    const msg = currentLang === 'ar' ? '⚠️ هل أنت متأكد من مسح كل التقدم؟' : '⚠️ Clear all progress?';
+    if (confirm(msg)) { localStorage.removeItem(STORAGE_KEY); location.reload(); }
+}
+
+function setupAnswerListeners() {
+    document.getElementById('exam-content').addEventListener('change', (e) => {
+        if (e.target.type === 'radio') saveState();
+    });
+}
+
+function setupInputListeners() {
+    ['studentName', 'studentClass', 'examDate'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', () => saveState(false));
+            el.addEventListener('blur', () => saveState());
+        }
+    });
+}
+
+// ==================== SVG DIAGRAMS ====================
+const svgGraphs = {
+    division_steps: `<svg class="svg-graph" width="500" height="380" viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="370" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#92400e" font-weight="bold">📐 خطوات قسمة كثير الحدود على وحيد الحد</text>
+        <!-- Example -->
+        <rect x="20" y="40" width="460" height="50" rx="6" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="65" text-anchor="middle" font-size="12" fill="#92400e" font-family="'Amiri', serif" font-weight="bold">Example: (6x⁴y³ + 12x³y² - 18x²y) ÷ (3xy)</text>
+        <!-- Step 1 -->
+        <rect x="20" y="100" width="460" height="55" rx="6" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="120" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">Step 1: Divide each term separately</text>
+        <text x="250" y="140" text-anchor="middle" font-size="11" fill="#92400e" font-family="'Amiri', serif">= 6x⁴y³/(3xy) + 12x³y²/(3xy) - 18x²y/(3xy)</text>
+        <!-- Step 2 -->
+        <rect x="20" y="165" width="460" height="55" rx="6" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="185" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">Step 2: Simplify coefficients</text>
+        <text x="250" y="205" text-anchor="middle" font-size="11" fill="#92400e" font-family="'Amiri', serif">= 2x⁴y³/(xy) + 4x³y²/(xy) - 6x²y/(xy)</text>
+        <!-- Step 3 -->
+        <rect x="20" y="230" width="460" height="55" rx="6" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="250" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">Step 3: Subtract exponents (xᵐ/xⁿ = xᵐ⁻ⁿ)</text>
+        <text x="250" y="270" text-anchor="middle" font-size="11" fill="#92400e" font-family="'Amiri', serif">= 2x³y² + 4x²y - 6x</text>
+        <!-- Final answer -->
+        <rect x="20" y="295" width="460" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+        <text x="250" y="320" text-anchor="middle" font-size="13" fill="#166534" font-family="'Amiri', serif" font-weight="bold">Answer: 2x³y² + 4x²y - 6x</text>
+        <!-- Verification -->
+        <rect x="20" y="345" width="460" height="25" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="362" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">✓ Verify: (2x³y² + 4x²y - 6x)(3xy) = 6x⁴y³ + 12x³y² - 18x²y ✓</text>
+    </svg>`,
+    
+    q52_solution: `<svg class="svg-graph" width="500" height="360" viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="350" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#1e40af" font-weight="bold">📝 السؤال 52: (6x⁴y³ + 12x³y² - 18x²y) ÷ (3xy)</text>
+        <!-- Term 1 -->
+        <rect x="20" y="45" width="460" height="60" rx="6" fill="#bfdbfe" stroke="#2563eb" stroke-width="2"/>
+        <text x="250" y="65" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">Term 1: 6x⁴y³ ÷ 3xy</text>
+        <text x="250" y="83" text-anchor="middle" font-size="11" fill="#1e40af" font-family="'Amiri', serif">Coefficients: 6 ÷ 3 = 2</text>
+        <text x="250" y="98" text-anchor="middle" font-size="11" fill="#1e40af" font-family="'Amiri', serif">x: x⁴ ÷ x = x³ | y: y³ ÷ y = y²</text>
+        <text x="250" y="113" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">Result: 2x³y²</text>
+        <!-- Term 2 -->
+        <rect x="20" y="115" width="460" height="60" rx="6" fill="#bfdbfe" stroke="#2563eb" stroke-width="2"/>
+        <text x="250" y="135" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">Term 2: 12x³y² ÷ 3xy</text>
+        <text x="250" y="153" text-anchor="middle" font-size="11" fill="#1e40af" font-family="'Amiri', serif">Coefficients: 12 ÷ 3 = 4</text>
+        <text x="250" y="168" text-anchor="middle" font-size="11" fill="#1e40af" font-family="'Amiri', serif">x: x³ ÷ x = x² | y: y² ÷ y = y</text>
+        <text x="250" y="183" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">Result: 4x²y</text>
+        <!-- Term 3 -->
+        <rect x="20" y="185" width="460" height="60" rx="6" fill="#bfdbfe" stroke="#2563eb" stroke-width="2"/>
+        <text x="250" y="205" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">Term 3: -18x²y ÷ 3xy</text>
+        <text x="250" y="223" text-anchor="middle" font-size="11" fill="#1e40af" font-family="'Amiri', serif">Coefficients: -18 ÷ 3 = -6</text>
+        <text x="250" y="238" text-anchor="middle" font-size="11" fill="#1e40af" font-family="'Amiri', serif">x: x² ÷ x = x | y: y ÷ y = 1</text>
+        <text x="250" y="253" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">Result: -6x</text>
+        <!-- Final -->
+        <rect x="20" y="260" width="460" height="50" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+        <text x="250" y="280" text-anchor="middle" font-size="12" fill="#166534" font-family="'Amiri', serif" font-weight="bold">Final Answer: 2x³y² + 4x²y - 6x</text>
+        <text x="250" y="300" text-anchor="middle" font-size="11" fill="#166534">Answer: a) 2x³y² + 4x²y - 6x</text>
+        <!-- Note -->
+        <rect x="20" y="320" width="460" height="30" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="340" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">💡 Remember: xⁿ ÷ xᵐ = xⁿ⁻ᵐ (subtract exponents!)</text>
+    </svg>`,
+    
+    q53_solution: `<svg class="svg-graph" width="500" height="360" viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="350" rx="12" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#9f1239" font-weight="bold">📝 السؤال 53: (20c⁴d²f - 16cdf² + 4cdf) ÷ (4cdf)</text>
+        <!-- Term 1 -->
+        <rect x="20" y="45" width="460" height="60" rx="6" fill="#fbcfe8" stroke="#ec4899" stroke-width="2"/>
+        <text x="250" y="65" text-anchor="middle" font-size="11" fill="#9f1239" font-weight="bold">Term 1: 20c⁴d²f ÷ 4cdf</text>
+        <text x="250" y="83" text-anchor="middle" font-size="11" fill="#9f1239" font-family="'Amiri', serif">Coefficients: 20 ÷ 4 = 5</text>
+        <text x="250" y="98" text-anchor="middle" font-size="11" fill="#9f1239" font-family="'Amiri', serif">c: c⁴ ÷ c = c³ | d: d² ÷ d = d | f: f ÷ f = 1</text>
+        <text x="250" y="113" text-anchor="middle" font-size="11" fill="#9f1239" font-weight="bold">Result: 5c³d</text>
+        <!-- Term 2 -->
+        <rect x="20" y="115" width="460" height="60" rx="6" fill="#fbcfe8" stroke="#ec4899" stroke-width="2"/>
+        <text x="250" y="135" text-anchor="middle" font-size="11" fill="#9f1239" font-weight="bold">Term 2: -16cdf² ÷ 4cdf</text>
+        <text x="250" y="153" text-anchor="middle" font-size="11" fill="#9f1239" font-family="'Amiri', serif">Coefficients: -16 ÷ 4 = -4</text>
+        <text x="250" y="168" text-anchor="middle" font-size="11" fill="#9f1239" font-family="'Amiri', serif">c: c ÷ c = 1 | d: d ÷ d = 1 | f: f² ÷ f = f</text>
+        <text x="250" y="183" text-anchor="middle" font-size="11" fill="#9f1239" font-weight="bold">Result: -4f</text>
+        <!-- Term 3 -->
+        <rect x="20" y="185" width="460" height="60" rx="6" fill="#fbcfe8" stroke="#ec4899" stroke-width="2"/>
+        <text x="250" y="205" text-anchor="middle" font-size="11" fill="#9f1239" font-weight="bold">Term 3: 4cdf ÷ 4cdf</text>
+        <text x="250" y="223" text-anchor="middle" font-size="11" fill="#9f1239" font-family="'Amiri', serif">Coefficients: 4 ÷ 4 = 1</text>
+        <text x="250" y="238" text-anchor="middle" font-size="11" fill="#9f1239" font-family="'Amiri', serif">All variables cancel: c/c = 1, d/d = 1, f/f = 1</text>
+        <text x="250" y="253" text-anchor="middle" font-size="11" fill="#9f1239" font-weight="bold">Result: 1</text>
+        <!-- Final -->
+        <rect x="20" y="260" width="460" height="50" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+        <text x="250" y="280" text-anchor="middle" font-size="12" fill="#166534" font-family="'Amiri', serif" font-weight="bold">Final Answer: 5c³d - 4f + 1</text>
+        <text x="250" y="300" text-anchor="middle" font-size="11" fill="#166534">Answer: c) 5c³d - 4f + 1</text>
+        <!-- Note -->
+        <rect x="20" y="320" width="460" height="30" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="340" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">💡 When same variable appears in numerator and denominator, they cancel!</text>
+    </svg>`,
+    
+    q54_solution: `<svg class="svg-graph" width="500" height="360" viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="350" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#065f46" font-weight="bold">📝 السؤال 54: (18x²y + 27x³y²z)(3xy)⁻¹</text>
+        <!-- Step 1 -->
+        <rect x="20" y="45" width="460" height="55" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+        <text x="250" y="65" text-anchor="middle" font-size="11" fill="#065f46" font-weight="bold">Step 1: Rewrite negative exponent as division</text>
+        <text x="250" y="85" text-anchor="middle" font-size="11" fill="#065f46" font-family="'Amiri', serif">(3xy)⁻¹ = 1/(3xy)</text>
+        <text x="250" y="100" text-anchor="middle" font-size="10" fill="#065f46">So expression becomes: (18x²y + 27x³y²z) / (3xy)</text>
+        <!-- Step 2 -->
+        <rect x="20" y="110" width="460" height="55" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+        <text x="250" y="130" text-anchor="middle" font-size="11" fill="#065f46" font-weight="bold">Step 2: Divide each term by 3xy</text>
+        <text x="250" y="150" text-anchor="middle" font-size="11" fill="#065f46" font-family="'Amiri', serif">= 18x²y/(3xy) + 27x³y²z/(3xy)</text>
+        <!-- Step 3 -->
+        <rect x="20" y="175" width="460" height="70" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+        <text x="250" y="195" text-anchor="middle" font-size="11" fill="#065f46" font-weight="bold">Step 3: Simplify each term</text>
+        <text x="250" y="215" text-anchor="middle" font-size="11" fill="#065f46" font-family="'Amiri', serif">18x²y/(3xy) = 6x (18÷3=6, x²÷x=x, y÷y=1)</text>
+        <text x="250" y="233" text-anchor="middle" font-size="11" fill="#065f46" font-family="'Amiri', serif">27x³y²z/(3xy) = 9x²yz (27÷3=9, x³÷x=x², y²÷y=y, z stays)</text>
+        <!-- Final -->
+        <rect x="20" y="255" width="460" height="50" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+        <text x="250" y="275" text-anchor="middle" font-size="12" fill="#166534" font-family="'Amiri', serif" font-weight="bold">Final Answer: 6x + 9x²yz</text>
+        <text x="250" y="295" text-anchor="middle" font-size="11" fill="#166534">Answer: b) 6x + 9x²yz</text>
+        <!-- Note -->
+        <rect x="20" y="315" width="460" height="35" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="335" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">💡 Key: a⁻¹ = 1/a, so multiply by (3xy)⁻¹ means divide by (3xy)</text>
+    </svg>`,
+    
+    q55_solution: `<svg class="svg-graph" width="500" height="360" viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="350" rx="12" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#5b21b6" font-weight="bold">📝 السؤال 55: (12a³b² - 8a²b + 4ab) ÷ (4ab)</text>
+        <!-- Term 1 -->
+        <rect x="20" y="45" width="460" height="60" rx="6" fill="#ddd6fe" stroke="#7c3aed" stroke-width="2"/>
+        <text x="250" y="65" text-anchor="middle" font-size="11" fill="#5b21b6" font-weight="bold">Term 1: 12a³b² ÷ 4ab</text>
+        <text x="250" y="83" text-anchor="middle" font-size="11" fill="#5b21b6" font-family="'Amiri', serif">Coefficients: 12 ÷ 4 = 3</text>
+        <text x="250" y="98" text-anchor="middle" font-size="11" fill="#5b21b6" font-family="'Amiri', serif">a: a³ ÷ a = a² | b: b² ÷ b = b</text>
+        <text x="250" y="113" text-anchor="middle" font-size="11" fill="#5b21b6" font-weight="bold">Result: 3a²b</text>
+        <!-- Term 2 -->
+        <rect x="20" y="115" width="460" height="60" rx="6" fill="#ddd6fe" stroke="#7c3aed" stroke-width="2"/>
+        <text x="250" y="135" text-anchor="middle" font-size="11" fill="#5b21b6" font-weight="bold">Term 2: -8a²b ÷ 4ab</text>
+        <text x="250" y="153" text-anchor="middle" font-size="11" fill="#5b21b6" font-family="'Amiri', serif">Coefficients: -8 ÷ 4 = -2</text>
+        <text x="250" y="168" text-anchor="middle" font-size="11" fill="#5b21b6" font-family="'Amiri', serif">a: a² ÷ a = a | b: b ÷ b = 1</text>
+        <text x="250" y="183" text-anchor="middle" font-size="11" fill="#5b21b6" font-weight="bold">Result: -2a</text>
+        <!-- Term 3 -->
+        <rect x="20" y="185" width="460" height="60" rx="6" fill="#ddd6fe" stroke="#7c3aed" stroke-width="2"/>
+        <text x="250" y="205" text-anchor="middle" font-size="11" fill="#5b21b6" font-weight="bold">Term 3: 4ab ÷ 4ab</text>
+        <text x="250" y="223" text-anchor="middle" font-size="11" fill="#5b21b6" font-family="'Amiri', serif">Coefficients: 4 ÷ 4 = 1</text>
+        <text x="250" y="238" text-anchor="middle" font-size="11" fill="#5b21b6" font-family="'Amiri', serif">All variables cancel: a/a = 1, b/b = 1</text>
+        <text x="250" y="253" text-anchor="middle" font-size="11" fill="#5b21b6" font-weight="bold">Result: 1</text>
+        <!-- Final -->
+        <rect x="20" y="260" width="460" height="50" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+        <text x="250" y="280" text-anchor="middle" font-size="12" fill="#166534" font-family="'Amiri', serif" font-weight="bold">Final Answer: 3a²b - 2a + 1</text>
+        <text x="250" y="300" text-anchor="middle" font-size="11" fill="#166534">Answer: d) 3a²b - 2a + 1</text>
+        <!-- Note -->
+        <rect x="20" y="320" width="460" height="30" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="340" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">💡 When numerator and denominator are identical, result is 1</text>
+    </svg>`,
+    
+    exponent_rules: `<svg class="svg-graph" width="500" height="340" viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="330" rx="12" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#9f1239" font-weight="bold">📐 قواعد الأسس للقسمة - Exponent Rules for Division</text>
+        <!-- Rule 1 -->
+        <rect x="20" y="45" width="460" height="60" rx="6" fill="#fbcfe8" stroke="#ec4899" stroke-width="2"/>
+        <text x="250" y="65" text-anchor="middle" font-size="12" fill="#9f1239" font-family="'Amiri', serif" font-weight="bold">Rule 1: xᵐ ÷ xⁿ = xᵐ⁻ⁿ</text>
+        <text x="250" y="85" text-anchor="middle" font-size="11" fill="#9f1239">Example: x⁵ ÷ x² = x³ | x⁴ ÷ x = x³ | x ÷ x = 1</text>
+        <text x="250" y="100" text-anchor="middle" font-size="10" fill="#9f1239">اطرح الأسس عند قسمة نفس الأساس</text>
+        <!-- Rule 2 -->
+        <rect x="20" y="115" width="460" height="60" rx="6" fill="#fbcfe8" stroke="#ec4899" stroke-width="2"/>
+        <text x="250" y="135" text-anchor="middle" font-size="12" fill="#9f1239" font-family="'Amiri', serif" font-weight="bold">Rule 2: x⁰ = 1 (for x ≠ 0)</text>
+        <text x="250" y="155" text-anchor="middle" font-size="11" fill="#9f1239">Example: x³ ÷ x³ = x⁰ = 1 | 5ab ÷ 5ab = 1</text>
+        <text x="250" y="170" text-anchor="middle" font-size="10" fill="#9f1239">أي عدد (ما عدا الصفر) مرفوع للأس صفر = 1</text>
+        <!-- Rule 3 -->
+        <rect x="20" y="185" width="460" height="60" rx="6" fill="#fbcfe8" stroke="#ec4899" stroke-width="2"/>
+        <text x="250" y="205" text-anchor="middle" font-size="12" fill="#9f1239" font-family="'Amiri', serif" font-weight="bold">Rule 3: x⁻ⁿ = 1/xⁿ</text>
+        <text x="250" y="225" text-anchor="middle" font-size="11" fill="#9f1239">Example: (3xy)⁻¹ = 1/(3xy)</text>
+        <text x="250" y="240" text-anchor="middle" font-size="10" fill="#9f1239">الأس السالب يعني مقلوب العدد</text>
+        <!-- Rule 4 -->
+        <rect x="20" y="255" width="460" height="70" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="275" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">🔑 Key Principle for Polynomial Division:</text>
+        <text x="250" y="295" text-anchor="middle" font-size="10" fill="#92400e">(a + b + c) ÷ d = a/d + b/d + c/d</text>
+        <text x="250" y="312" text-anchor="middle" font-size="10" fill="#92400e">Divide EACH TERM of the polynomial by the monomial</text>
+        <text x="250" y="325" text-anchor="middle" font-size="9" fill="#92400e" font-weight="bold">اقسم كل حد من كثير الحدود على وحيد الحد</text>
+    </svg>`,
+    
+    common_mistakes: `<svg class="svg-graph" width="500" height="380" viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="370" rx="12" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#991b1b" font-weight="bold">⚠️ أخطاء شائعة - Common Mistakes</text>
+        <!-- Mistake 1 -->
+        <rect x="20" y="45" width="460" height="70" rx="6" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+        <text x="250" y="65" text-anchor="middle" font-size="11" fill="#991b1b" font-weight="bold">Mistake 1: Adding exponents instead of subtracting</text>
+        <text x="250" y="83" text-anchor="middle" font-size="10" fill="#991b1b">Wrong: x⁵ ÷ x² = x⁷ ✗ (added exponents)</text>
+        <text x="250" y="100" text-anchor="middle" font-size="10" fill="#991b1b">Correct: x⁵ ÷ x² = x³ ✓ (subtracted: 5-2=3)</text>
+        <text x="250" y="113" text-anchor="middle" font-size="9" fill="#991b1b">⚠️ Division → SUBTRACT exponents, not add!</text>
+        <!-- Mistake 2 -->
+        <rect x="20" y="125" width="460" height="70" rx="6" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+        <text x="250" y="145" text-anchor="middle" font-size="11" fill="#991b1b" font-weight="bold">Mistake 2: Forgetting to divide coefficients</text>
+        <text x="250" y="163" text-anchor="middle" font-size="10" fill="#991b1b">Wrong: 12x³ ÷ 4x = 12x² ✗ (forgot to divide 12 by 4)</text>
+        <text x="250" y="180" text-anchor="middle" font-size="10" fill="#991b1b">Correct: 12x³ ÷ 4x = 3x² ✓ (12÷4=3, x³÷x=x²)</text>
+        <text x="250" y="193" text-anchor="middle" font-size="9" fill="#991b1b">⚠️ Always divide the numerical coefficients first!</text>
+        <!-- Mistake 3 -->
+        <rect x="20" y="205" width="460" height="70" rx="6" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+        <text x="250" y="225" text-anchor="middle" font-size="11" fill="#991b1b" font-weight="bold">Mistake 3: Not dividing ALL terms</text>
+        <text x="250" y="243" text-anchor="middle" font-size="10" fill="#991b1b">Wrong: (6x² + 3x) ÷ 3x = 2x ✗ (missed second term)</text>
+        <text x="250" y="260" text-anchor="middle" font-size="10" fill="#991b1b">Correct: (6x² + 3x) ÷ 3x = 2x + 1 ✓</text>
+        <text x="250" y="273" text-anchor="middle" font-size="9" fill="#991b1b">⚠️ Divide EVERY term by the monomial!</text>
+        <!-- Mistake 4 -->
+        <rect x="20" y="285" width="460" height="70" rx="6" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+        <text x="250" y="305" text-anchor="middle" font-size="11" fill="#991b1b" font-weight="bold">Mistake 4: Sign errors</text>
+        <text x="250" y="323" text-anchor="middle" font-size="10" fill="#991b1b">Wrong: (-12x³) ÷ (4x) = 3x² ✗ (wrong sign)</text>
+        <text x="250" y="340" text-anchor="middle" font-size="10" fill="#991b1b">Correct: (-12x³) ÷ (4x) = -3x² ✓</text>
+        <text x="250" y="353" text-anchor="middle" font-size="9" fill="#991b1b">⚠️ Negative ÷ Positive = Negative!</text>
+    </svg>`,
+    
+    practice_table: `<svg class="svg-graph" width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="390" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#065f46" font-weight="bold">📋 جدول التدريب - Practice Table</text>
+        <!-- Header -->
+        <rect x="20" y="45" width="140" height="35" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+        <text x="90" y="68" text-anchor="middle" font-size="11" fill="#065f46" font-weight="bold">Expression</text>
+        <rect x="160" y="45" width="160" height="35" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+        <text x="240" y="68" text-anchor="middle" font-size="11" fill="#065f46" font-weight="bold">÷ By</text>
+        <rect x="320" y="45" width="160" height="35" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+        <text x="400" y="68" text-anchor="middle" font-size="11" fill="#065f46" font-weight="bold">Result</text>
+        <!-- Row 1 -->
+        <rect x="20" y="80" width="140" height="30" fill="#ecfdf5" stroke="#10b981" stroke-width="1"/>
+        <text x="90" y="100" text-anchor="middle" font-size="10" fill="#065f46">6x⁴y³</text>
+        <rect x="160" y="80" width="160" height="30" fill="#ecfdf5" stroke="#10b981" stroke-width="1"/>
+        <text x="240" y="100" text-anchor="middle" font-size="10" fill="#065f46">3xy</text>
+        <rect x="320" y="80" width="160" height="30" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+        <text x="400" y="100" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">2x³y²</text>
+        <!-- Row 2 -->
+        <rect x="20" y="110" width="140" height="30" fill="#ecfdf5" stroke="#10b981" stroke-width="1"/>
+        <text x="90" y="130" text-anchor="middle" font-size="10" fill="#065f46">12x³y²</text>
+        <rect x="160" y="110" width="160" height="30" fill="#ecfdf5" stroke="#10b981" stroke-width="1"/>
+        <text x="240" y="130" text-anchor="middle" font-size="10" fill="#065f46">3xy</text>
+        <rect x="320" y="110" width="160" height="30" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+        <text x="400" y="130" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">4x²y</text>
+        <!-- Row 3 -->
+        <rect x="20" y="140" width="140" height="30" fill="#ecfdf5" stroke="#10b981" stroke-width="1"/>
+        <text x="90" y="160" text-anchor="middle" font-size="10" fill="#065f46">-18x²y</text>
+        <rect x="160" y="140" width="160" height="30" fill="#ecfdf5" stroke="#10b981" stroke-width="1"/>
+        <text x="240" y="160" text-anchor="middle" font-size="10" fill="#065f46">3xy</text>
+        <rect x="320" y="140" width="160" height="30" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+        <text x="400" y="160" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">-6x</text>
+        <!-- Row 4 -->
+        <rect x="20" y="180" width="140" height="30" fill="#ecfdf5" stroke="#10b981" stroke-width="1"/>
+        <text x="90" y="200" text-anchor="middle" font-size="10" fill="#065f46">20c⁴d²f</text>
+        <rect x="160" y="180" width="160" height="30" fill="#ecfdf5" stroke="#10b981" stroke-width="1"/>
+        <text x="240" y="200" text-anchor="middle" font-size="10" fill="#065f46">4cdf</text>
+        <rect x="320" y="180" width="160" height="30" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+        <text x="400" y="200" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">5c³d</text>
+        <!-- Row 5 -->
+        <rect x="20" y="210" width="140" height="30" fill="#ecfdf5" stroke="#10b981" stroke-width="1"/>
+        <text x="90" y="230" text-anchor="middle" font-size="10" fill="#065f46">-16cdf²</text>
+        <rect x="160" y="210" width="160" height="30" fill="#ecfdf5" stroke="#10b981" stroke-width="1"/>
+        <text x="240" y="230" text-anchor="middle" font-size="10" fill="#065f46">4cdf</text>
+        <rect x="320" y="210" width="160" height="30" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+        <text x="400" y="230" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">-4f</text>
+        <!-- Row 6 -->
+        <rect x="20" y="240" width="140" height="30" fill="#ecfdf5" stroke="#10b981" stroke-width="1"/>
+        <text x="90" y="260" text-anchor="middle" font-size="10" fill="#065f46">4cdf</text>
+        <rect x="160" y="240" width="160" height="30" fill="#ecfdf5" stroke="#10b981" stroke-width="1"/>
+        <text x="240" y="260" text-anchor="middle" font-size="10" fill="#065f46">4cdf</text>
+        <rect x="320" y="240" width="160" height="30" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+        <text x="400" y="260" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">1</text>
+        <!-- Tips -->
+        <rect x="20" y="285" width="460" height="100" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="305" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">💡 Tips for Success:</text>
+        <text x="250" y="323" text-anchor="middle" font-size="10" fill="#92400e">1. Divide coefficients first (numbers)</text>
+        <text x="250" y="340" text-anchor="middle" font-size="10" fill="#92400e">2. For each variable: subtract exponents (numerator - denominator)</text>
+        <text x="250" y="357" text-anchor="middle" font-size="10" fill="#92400e">3. If exponent becomes 0, that variable disappears (x⁰ = 1)</text>
+        <text x="250" y="374" text-anchor="middle" font-size="10" fill="#92400e">4. If exponent becomes negative, write as 1/xⁿ</text>
+        <text x="250" y="387" text-anchor="middle" font-size="9" fill="#92400e" font-weight="bold">5. Keep the sign of each term!</text>
+    </svg>`,
+    
+    negative_exponent: `<svg class="svg-graph" width="500" height="320" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="310" rx="12" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#5b21b6" font-weight="bold">📐 الأسس السالبة - Negative Exponents</text>
+        <!-- Rule -->
+        <rect x="20" y="45" width="460" height="60" rx="6" fill="#ddd6fe" stroke="#7c3aed" stroke-width="2"/>
+        <text x="250" y="70" text-anchor="middle" font-size="13" fill="#5b21b6" font-family="'Amiri', serif" font-weight="bold">a⁻ⁿ = 1/aⁿ</text>
+        <text x="250" y="92" text-anchor="middle" font-size="11" fill="#5b21b6">Negative exponent means reciprocal (مقلوب)</text>
+        <!-- Example 1 -->
+        <rect x="20" y="115" width="220" height="90" rx="6" fill="#ddd6fe" stroke="#7c3aed" stroke-width="2"/>
+        <text x="130" y="135" text-anchor="middle" font-size="11" fill="#5b21b6" font-weight="bold">Example 1: (3xy)⁻¹</text>
+        <text x="130" y="155" text-anchor="middle" font-size="10" fill="#5b21b6" font-family="'Amiri', serif">= 1/(3xy)</text>
+        <text x="130" y="175" text-anchor="middle" font-size="10" fill="#5b21b6">So: f(x)·(3xy)⁻¹ = f(x)/(3xy)</text>
+        <text x="130" y="195" text-anchor="middle" font-size="9" fill="#5b21b6">Multiply by (3xy)⁻¹ = Divide by 3xy</text>
+        <!-- Example 2 -->
+        <rect x="260" y="115" width="220" height="90" rx="6" fill="#ddd6fe" stroke="#7c3aed" stroke-width="2"/>
+        <text x="370" y="135" text-anchor="middle" font-size="11" fill="#5b21b6" font-weight="bold">Example 2: x⁻²</text>
+        <text x="370" y="155" text-anchor="middle" font-size="10" fill="#5b21b6" font-family="'Amiri', serif">= 1/x²</text>
+        <text x="370" y="175" text-anchor="middle" font-size="10" fill="#5b21b6">x⁵ · x⁻² = x⁵/x² = x³</text>
+        <text x="370" y="195" text-anchor="middle" font-size="9" fill="#5b21b6">Negative exponent in numerator → move to denominator</text>
+        <!-- Application -->
+        <rect x="20" y="215" width="460" height="80" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="235" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">Application to Question 54:</text>
+        <text x="250" y="255" text-anchor="middle" font-size="10" fill="#92400e" font-family="'Amiri', serif">(18x²y + 27x³y²z)(3xy)⁻¹</text>
+        <text x="250" y="273" text-anchor="middle" font-size="10" fill="#92400e">= (18x²y + 27x³y²z) / (3xy)</text>
+        <text x="250" y="290" text-anchor="middle" font-size="10" fill="#92400e">= 18x²y/(3xy) + 27x³y²z/(3xy)</text>
+        <text x="250" y="305" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">= 6x + 9x²yz</text>
+    </svg>`,
+    
+    verification_method: `<svg class="svg-graph" width="500" height="340" viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="330" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#92400e" font-weight="bold">✓ التحقق من الإجابة - Verification Method</text>
+        <!-- Method -->
+        <rect x="20" y="45" width="460" height="60" rx="6" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="70" text-anchor="middle" font-size="12" fill="#92400e" font-family="'Amiri', serif" font-weight="bold">Quotient × Divisor = Dividend</text>
+        <text x="250" y="92" text-anchor="middle" font-size="11" fill="#92400e">الناتج × المقسوم عليه = المقسوم</text>
+        <!-- Example -->
+        <rect x="20" y="115" width="460" height="100" rx="6" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="135" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">Example: (6x⁴y³ + 12x³y² - 18x²y) ÷ (3xy) = 2x³y² + 4x²y - 6x</text>
+        <text x="250" y="155" text-anchor="middle" font-size="10" fill="#92400e">Verify: (2x³y² + 4x²y - 6x)(3xy)</text>
+        <text x="250" y="173" text-anchor="middle" font-size="10" fill="#92400e">= 2x³y²·3xy + 4x²y·3xy - 6x·3xy</text>
+        <text x="250" y="190" text-anchor="middle" font-size="10" fill="#92400e">= 6x⁴y³ + 12x³y² - 18x²y ✓</text>
+        <text x="250" y="208" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">Matches original dividend! Answer is correct.</text>
+        <!-- Tips -->
+        <rect x="20" y="225" width="460" height="95" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="245" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">🔑 Verification Steps:</text>
+        <text x="250" y="263" text-anchor="middle" font-size="10" fill="#92400e">1. Multiply your answer by the divisor</text>
+        <text x="250" y="280" text-anchor="middle" font-size="10" fill="#92400e">2. Distribute to each term</text>
+        <text x="250" y="297" text-anchor="middle" font-size="10" fill="#92400e">3. Check if result matches original dividend</text>
+        <text x="250" y="314" text-anchor="middle" font-size="10" fill="#92400e">4. If yes → correct! If no → recheck your work</text>
+    </svg>`
+};
+
+// ==================== EXAM DATA - 30 QUESTIONS ====================
+const originalExamData = {
+    sections: [
+        {
+            id: 'sec1',
+            title: { ar: '🔹 القسم 1: قسمة أساسية (مثل Q52) (Q1-Q5)', en: '🔹 Section 1: Basic Division (like Q52) (Q1-Q5)' },
+            questions: [
+                {
+                    q: { ar: '<strong>السؤال 1 (مثل السؤال 52):</strong> حوّل لأبسط صورة: <span class="math-display">(6x⁴y³ + 12x³y² - 18x²y) / (3xy)</span>', en: '<strong>Question 1 (like Q52):</strong> Simplify: <span class="math-display">(6x⁴y³ + 12x³y² - 18x²y) / (3xy)</span>' },
+                    svg: svgGraphs.q52_solution,
+                    options: [
+                        { ar: '<span class="math-display">2x³y² + 4x²y - 6x</span>', en: '<span class="math-display">2x³y² + 4x²y - 6x</span>' },
+                        { ar: '<span class="math-display">2x³y² + 4x²y - 6xy</span>', en: '<span class="math-display">2x³y² + 4x²y - 6xy</span>' },
+                        { ar: '<span class="math-display">3x³y² + 9x²y - 15x</span>', en: '<span class="math-display">3x³y² + 9x²y - 15x</span>' },
+                        { ar: '<span class="math-display">2x⁴y³ + 4x³y² - 6x²y</span>', en: '<span class="math-display">2x⁴y³ + 4x³y² - 6x²y</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '6x⁴y³÷3xy = 2x³y²، 12x³y²÷3xy = 4x²y، -18x²y÷3xy = -6x. الناتج: 2x³y² + 4x²y - 6x', en: '6x⁴y³÷3xy = 2x³y², 12x³y²÷3xy = 4x²y, -18x²y÷3xy = -6x. Answer: 2x³y² + 4x²y - 6x' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 2:</strong> حوّل لأبسط صورة: <span class="math-display">(8x³y² + 12x²y - 4xy) / (4xy)</span>', en: '<strong>Question 2:</strong> Simplify: <span class="math-display">(8x³y² + 12x²y - 4xy) / (4xy)</span>' },
+                    options: [
+                        { ar: '<span class="math-display">2x²y + 3x - 1</span>', en: '<span class="math-display">2x²y + 3x - 1</span>' },
+                        { ar: '<span class="math-display">2x²y + 3x</span>', en: '<span class="math-display">2x²y + 3x</span>' },
+                        { ar: '<span class="math-display">8x²y + 12x - 4</span>', en: '<span class="math-display">8x²y + 12x - 4</span>' },
+                        { ar: '<span class="math-display">2x³y² + 3x²y - xy</span>', en: '<span class="math-display">2x³y² + 3x²y - xy</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '8x³y²÷4xy = 2x²y، 12x²y÷4xy = 3x، -4xy÷4xy = -1. الناتج: 2x²y + 3x - 1', en: '8x³y²÷4xy = 2x²y, 12x²y÷4xy = 3x, -4xy÷4xy = -1. Answer: 2x²y + 3x - 1' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 3:</strong> حوّل لأبسط صورة: <span class="math-display">(15a⁴b³ - 10a³b² + 5a²b) / (5a²b)</span>', en: '<strong>Question 3:</strong> Simplify: <span class="math-display">(15a⁴b³ - 10a³b² + 5a²b) / (5a²b)</span>' },
+                    options: [
+                        { ar: '<span class="math-display">3a²b² - 2ab + 1</span>', en: '<span class="math-display">3a²b² - 2ab + 1</span>' },
+                        { ar: '<span class="math-display">3a²b² - 2ab</span>', en: '<span class="math-display">3a²b² - 2ab</span>' },
+                        { ar: '<span class="math-display">15a²b² - 10ab + 5</span>', en: '<span class="math-display">15a²b² - 10ab + 5</span>' },
+                        { ar: '<span class="math-display">3a⁴b³ - 2a³b² + a²b</span>', en: '<span class="math-display">3a⁴b³ - 2a³b² + a²b</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '15a⁴b³÷5a²b = 3a²b²، -10a³b²÷5a²b = -2ab، 5a²b÷5a²b = 1. الناتج: 3a²b² - 2ab + 1', en: '15a⁴b³÷5a²b = 3a²b², -10a³b²÷5a²b = -2ab, 5a²b÷5a²b = 1. Answer: 3a²b² - 2ab + 1' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 4:</strong> حوّل لأبسط صورة: <span class="math-display">(20m⁵n³ - 15m⁴n² + 10m³n) / (5m³n)</span>', en: '<strong>Question 4:</strong> Simplify: <span class="math-display">(20m⁵n³ - 15m⁴n² + 10m³n) / (5m³n)</span>' },
+                    options: [
+                        { ar: '<span class="math-display">4m²n² - 3mn + 2</span>', en: '<span class="math-display">4m²n² - 3mn + 2</span>' },
+                        { ar: '<span class="math-display">4m²n² - 3mn</span>', en: '<span class="math-display">4m²n² - 3mn</span>' },
+                        { ar: '<span class="math-display">20m²n² - 15mn + 10</span>', en: '<span class="math-display">20m²n² - 15mn + 10</span>' },
+                        { ar: '<span class="math-display">4m⁵n³ - 3m⁴n² + 2m³n</span>', en: '<span class="math-display">4m⁵n³ - 3m⁴n² + 2m³n</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '20m⁵n³÷5m³n = 4m²n²، -15m⁴n²÷5m³n = -3mn، 10m³n÷5m³n = 2. الناتج: 4m²n² - 3mn + 2', en: '20m⁵n³÷5m³n = 4m²n², -15m⁴n²÷5m³n = -3mn, 10m³n÷5m³n = 2. Answer: 4m²n² - 3mn + 2' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 5:</strong> حوّل لأبسط صورة: <span class="math-display">(24p⁶q⁴ - 16p⁵q³ + 8p⁴q²) / (8p⁴q²)</span>', en: '<strong>Question 5:</strong> Simplify: <span class="math-display">(24p⁶q⁴ - 16p⁵q³ + 8p⁴q²) / (8p⁴q²)</span>' },
+                    options: [
+                        { ar: '<span class="math-display">3p²q² - 2pq + 1</span>', en: '<span class="math-display">3p²q² - 2pq + 1</span>' },
+                        { ar: '<span class="math-display">3p²q² - 2pq</span>', en: '<span class="math-display">3p²q² - 2pq</span>' },
+                        { ar: '<span class="math-display">24p²q² - 16pq + 8</span>', en: '<span class="math-display">24p²q² - 16pq + 8</span>' },
+                        { ar: '<span class="math-display">3p⁶q⁴ - 2p⁵q³ + p⁴q²</span>', en: '<span class="math-display">3p⁶q⁴ - 2p⁵q³ + p⁴q²</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '24p⁶q⁴÷8p⁴q² = 3p²q²، -16p⁵q³÷8p⁴q² = -2pq، 8p⁴q²÷8p⁴q² = 1. الناتج: 3p²q² - 2pq + 1', en: '24p⁶q⁴÷8p⁴q² = 3p²q², -16p⁵q³÷8p⁴q² = -2pq, 8p⁴q²÷8p⁴q² = 1. Answer: 3p²q² - 2pq + 1' }
+                }
+            ]
+        },
+        {
+            id: 'sec2',
+            title: { ar: '🔹 القسم 2: قسمة مع متغيرات متعددة (مثل Q53) (Q6-Q10)', en: '🔹 Section 2: Division with Multiple Variables (like Q53) (Q6-Q10)' },
+            questions: [
+                {
+                    q: { ar: '<strong>السؤال 6 (مثل السؤال 53):</strong> حوّل لأبسط صورة: <span class="math-display">(20c⁴d²f - 16cdf² + 4cdf) ÷ (4cdf)</span>', en: '<strong>Question 6 (like Q53):</strong> Simplify: <span class="math-display">(20c⁴d²f - 16cdf² + 4cdf) ÷ (4cdf)</span>' },
+                    svg: svgGraphs.q53_solution,
+                    options: [
+                        { ar: '<span class="math-display">5c³d - 4f + 1</span>', en: '<span class="math-display">5c³d - 4f + 1</span>' },
+                        { ar: '<span class="math-display">5c⁴d² - 4f + 1</span>', en: '<span class="math-display">5c⁴d² - 4f + 1</span>' },
+                        { ar: '<span class="math-display">5c³d - 4df + 4</span>', en: '<span class="math-display">5c³d - 4df + 4</span>' },
+                        { ar: '<span class="math-display">5c³d - 4f</span>', en: '<span class="math-display">5c³d - 4f</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '20c⁴d²f÷4cdf = 5c³d، -16cdf²÷4cdf = -4f، 4cdf÷4cdf = 1. الناتج: 5c³d - 4f + 1', en: '20c⁴d²f÷4cdf = 5c³d, -16cdf²÷4cdf = -4f, 4cdf÷4cdf = 1. Answer: 5c³d - 4f + 1' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 7:</strong> حوّل لأبسط صورة: <span class="math-display">(18x³y²z - 12x²yz + 6xyz) ÷ (6xyz)</span>', en: '<strong>Question 7:</strong> Simplify: <span class="math-display">(18x³y²z - 12x²yz + 6xyz) ÷ (6xyz)</span>' },
+                    options: [
+                        { ar: '<span class="math-display">3x²y - 2x + 1</span>', en: '<span class="math-display">3x²y - 2x + 1</span>' },
+                        { ar: '<span class="math-display">3x²y - 2x</span>', en: '<span class="math-display">3x²y - 2x</span>' },
+                        { ar: '<span class="math-display">18x²y - 12x + 6</span>', en: '<span class="math-display">18x²y - 12x + 6</span>' },
+                        { ar: '<span class="math-display">3x³y² - 2x²y + xy</span>', en: '<span class="math-display">3x³y² - 2x²y + xy</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '18x³y²z÷6xyz = 3x²y، -12x²yz÷6xyz = -2x، 6xyz÷6xyz = 1. الناتج: 3x²y - 2x + 1', en: '18x³y²z÷6xyz = 3x²y, -12x²yz÷6xyz = -2x, 6xyz÷6xyz = 1. Answer: 3x²y - 2x + 1' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 8:</strong> حوّل لأبسط صورة: <span class="math-display">(24a⁵b³c² - 16a⁴b²c + 8a³bc) ÷ (8a³bc)</span>', en: '<strong>Question 8:</strong> Simplify: <span class="math-display">(24a⁵b³c² - 16a⁴b²c + 8a³bc) ÷ (8a³bc)</span>' },
+                    options: [
+                        { ar: '<span class="math-display">3a²b²c - 2ab + 1</span>', en: '<span class="math-display">3a²b²c - 2ab + 1</span>' },
+                        { ar: '<span class="math-display">3a²b²c - 2ab</span>', en: '<span class="math-display">3a²b²c - 2ab</span>' },
+                        { ar: '<span class="math-display">24a²b²c - 16ab + 8</span>', en: '<span class="math-display">24a²b²c - 16ab + 8</span>' },
+                        { ar: '<span class="math-display">3a⁵b³c² - 2a⁴b²c + a³bc</span>', en: '<span class="math-display">3a⁵b³c² - 2a⁴b²c + a³bc</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '24a⁵b³c²÷8a³bc = 3a²b²c، -16a⁴b²c÷8a³bc = -2ab، 8a³bc÷8a³bc = 1. الناتج: 3a²b²c - 2ab + 1', en: '24a⁵b³c²÷8a³bc = 3a²b²c, -16a⁴b²c÷8a³bc = -2ab, 8a³bc÷8a³bc = 1. Answer: 3a²b²c - 2ab + 1' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 9:</strong> حوّل لأبسط صورة: <span class="math-display">(30m⁴n³p² - 20m³n²p + 10m²np) ÷ (10m²np)</span>', en: '<strong>Question 9:</strong> Simplify: <span class="math-display">(30m⁴n³p² - 20m³n²p + 10m²np) ÷ (10m²np)</span>' },
+                    options: [
+                        { ar: '<span class="math-display">3m²n²p - 2mn + 1</span>', en: '<span class="math-display">3m²n²p - 2mn + 1</span>' },
+                        { ar: '<span class="math-display">3m²n²p - 2mn</span>', en: '<span class="math-display">3m²n²p - 2mn</span>' },
+                        { ar: '<span class="math-display">30m²n²p - 20mn + 10</span>', en: '<span class="math-display">30m²n²p - 20mn + 10</span>' },
+                        { ar: '<span class="math-display">3m⁴n³p² - 2m³n²p + m²np</span>', en: '<span class="math-display">3m⁴n³p² - 2m³n²p + m²np</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '30m⁴n³p²÷10m²np = 3m²n²p، -20m³n²p÷10m²np = -2mn، 10m²np÷10m²np = 1. الناتج: 3m²n²p - 2mn + 1', en: '30m⁴n³p²÷10m²np = 3m²n²p, -20m³n²p÷10m²np = -2mn, 10m²np÷10m²np = 1. Answer: 3m²n²p - 2mn + 1' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 10:</strong> حوّل لأبسط صورة: <span class="math-display">(14x⁶y⁴z³ - 7x⁵y³z² + 21x⁴y²z) ÷ (7x⁴y²z)</span>', en: '<strong>Question 10:</strong> Simplify: <span class="math-display">(14x⁶y⁴z³ - 7x⁵y³z² + 21x⁴y²z) ÷ (7x⁴y²z)</span>' },
+                    options: [
+                        { ar: '<span class="math-display">2x²y²z² - xy z + 3</span>', en: '<span class="math-display">2x²y²z² - xyz + 3</span>' },
+                        { ar: '<span class="math-display">2x²y²z² - xyz</span>', en: '<span class="math-display">2x²y²z² - xyz</span>' },
+                        { ar: '<span class="math-display">14x²y²z² - 7xyz + 21</span>', en: '<span class="math-display">14x²y²z² - 7xyz + 21</span>' },
+                        { ar: '<span class="math-display">2x⁶y⁴z³ - xy³z² + 3x⁴y²z</span>', en: '<span class="math-display">2x⁶y⁴z³ - xy³z² + 3x⁴y²z</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '14x⁶y⁴z³÷7x⁴y²z = 2x²y²z²، -7x⁵y³z²÷7x⁴y²z = -xyz، 21x⁴y²z÷7x⁴y²z = 3. الناتج: 2x²y²z² - xyz + 3', en: '14x⁶y⁴z³÷7x⁴y²z = 2x²y²z², -7x⁵y³z²÷7x⁴y²z = -xyz, 21x⁴y²z÷7x⁴y²z = 3. Answer: 2x²y²z² - xyz + 3' }
+                }
+            ]
+        },
+        {
+            id: 'sec3',
+            title: { ar: '🔹 القسم 3: الأسس السالبة (مثل Q54) (Q11-Q15)', en: '🔹 Section 3: Negative Exponents (like Q54) (Q11-Q15)' },
+            questions: [
+                {
+                    q: { ar: '<strong>السؤال 11 (مثل السؤال 54):</strong> حوّل لأبسط صورة: <span class="math-display">(18x²y + 27x³y²z)(3xy)⁻¹</span>', en: '<strong>Question 11 (like Q54):</strong> Simplify: <span class="math-display">(18x²y + 27x³y²z)(3xy)⁻¹</span>' },
+                    svg: svgGraphs.q54_solution,
+                    options: [
+                        { ar: '<span class="math-display">6x + 9x²yz</span>', en: '<span class="math-display">6x + 9x²yz</span>' },
+                        { ar: '<span class="math-display">6x + 9x²y²z</span>', en: '<span class="math-display">6x + 9x²y²z</span>' },
+                        { ar: '<span class="math-display">18x + 27x²yz</span>', en: '<span class="math-display">18x + 27x²yz</span>' },
+                        { ar: '<span class="math-display">6xy + 9x²yz</span>', en: '<span class="math-display">6xy + 9x²yz</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '(3xy)⁻¹ = 1/(3xy). إذن: 18x²y/(3xy) + 27x³y²z/(3xy) = 6x + 9x²yz', en: '(3xy)⁻¹ = 1/(3xy). So: 18x²y/(3xy) + 27x³y²z/(3xy) = 6x + 9x²yz' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 12:</strong> حوّل لأبسط صورة: <span class="math-display">(12a³b + 8a²b²)(2ab)⁻¹</span>', en: '<strong>Question 12:</strong> Simplify: <span class="math-display">(12a³b + 8a²b²)(2ab)⁻¹</span>' },
+                    options: [
+                        { ar: '<span class="math-display">6a² + 4ab</span>', en: '<span class="math-display">6a² + 4ab</span>' },
+                        { ar: '<span class="math-display">6a² + 4b</span>', en: '<span class="math-display">6a² + 4b</span>' },
+                        { ar: '<span class="math-display">12a² + 8ab</span>', en: '<span class="math-display">12a² + 8ab</span>' },
+                        { ar: '<span class="math-display">6a³ + 4a²b</span>', en: '<span class="math-display">6a³ + 4a²b</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '(2ab)⁻¹ = 1/(2ab). 12a³b/(2ab) = 6a²، 8a²b²/(2ab) = 4ab. الناتج: 6a² + 4ab', en: '(2ab)⁻¹ = 1/(2ab). 12a³b/(2ab) = 6a², 8a²b²/(2ab) = 4ab. Answer: 6a² + 4ab' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 13:</strong> حوّل لأبسط صورة: <span class="math-display">(20x⁴y³ - 15x³y²)(5x²y)⁻¹</span>', en: '<strong>Question 13:</strong> Simplify: <span class="math-display">(20x⁴y³ - 15x³y²)(5x²y)⁻¹</span>' },
+                    options: [
+                        { ar: '<span class="math-display">4x²y² - 3xy</span>', en: '<span class="math-display">4x²y² - 3xy</span>' },
+                        { ar: '<span class="math-display">4x²y² - 3y</span>', en: '<span class="math-display">4x²y² - 3y</span>' },
+                        { ar: '<span class="math-display">20x²y² - 15xy</span>', en: '<span class="math-display">20x²y² - 15xy</span>' },
+                        { ar: '<span class="math-display">4x⁴y³ - 3x³y²</span>', en: '<span class="math-display">4x⁴y³ - 3x³y²</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '(5x²y)⁻¹ = 1/(5x²y). 20x⁴y³/(5x²y) = 4x²y²، -15x³y²/(5x²y) = -3xy. الناتج: 4x²y² - 3xy', en: '(5x²y)⁻¹ = 1/(5x²y). 20x⁴y³/(5x²y) = 4x²y², -15x³y²/(5x²y) = -3xy. Answer: 4x²y² - 3xy' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 14:</strong> حوّل لأبسط صورة: <span class="math-display">(24m⁵n⁴ + 16m⁴n³)(8m³n²)⁻¹</span>', en: '<strong>Question 14:</strong> Simplify: <span class="math-display">(24m⁵n⁴ + 16m⁴n³)(8m³n²)⁻¹</span>' },
+                    options: [
+                        { ar: '<span class="math-display">3m²n² + 2mn</span>', en: '<span class="math-display">3m²n² + 2mn</span>' },
+                        { ar: '<span class="math-display">3m²n² + 2n</span>', en: '<span class="math-display">3m²n² + 2n</span>' },
+                        { ar: '<span class="math-display">24m²n² + 16mn</span>', en: '<span class="math-display">24m²n² + 16mn</span>' },
+                        { ar: '<span class="math-display">3m⁵n⁴ + 2m⁴n³</span>', en: '<span class="math-display">3m⁵n⁴ + 2m⁴n³</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '(8m³n²)⁻¹ = 1/(8m³n²). 24m⁵n⁴/(8m³n²) = 3m²n²، 16m⁴n³/(8m³n²) = 2mn. الناتج: 3m²n² + 2mn', en: '(8m³n²)⁻¹ = 1/(8m³n²). 24m⁵n⁴/(8m³n²) = 3m²n², 16m⁴n³/(8m³n²) = 2mn. Answer: 3m²n² + 2mn' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 15:</strong> حوّل لأبسط صورة: <span class="math-display">(30p⁶q⁵ - 12p⁵q⁴)(6p⁴q³)⁻¹</span>', en: '<strong>Question 15:</strong> Simplify: <span class="math-display">(30p⁶q⁵ - 12p⁵q⁴)(6p⁴q³)⁻¹</span>' },
+                    options: [
+                        { ar: '<span class="math-display">5p²q² - 2pq</span>', en: '<span class="math-display">5p²q² - 2pq</span>' },
+                        { ar: '<span class="math-display">5p²q² - 2q</span>', en: '<span class="math-display">5p²q² - 2q</span>' },
+                        { ar: '<span class="math-display">30p²q² - 12pq</span>', en: '<span class="math-display">30p²q² - 12pq</span>' },
+                        { ar: '<span class="math-display">5p⁶q⁵ - 2p⁵q⁴</span>', en: '<span class="math-display">5p⁶q⁵ - 2p⁵q⁴</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '(6p⁴q³)⁻¹ = 1/(6p⁴q³). 30p⁶q⁵/(6p⁴q³) = 5p²q²، -12p⁵q⁴/(6p⁴q³) = -2pq. الناتج: 5p²q² - 2pq', en: '(6p⁴q³)⁻¹ = 1/(6p⁴q³). 30p⁶q⁵/(6p⁴q³) = 5p²q², -12p⁵q⁴/(6p⁴q³) = -2pq. Answer: 5p²q² - 2pq' }
+                }
+            ]
+        },
+        {
+            id: 'sec4',
+            title: { ar: '🔹 القسم 4: قسمة متقدمة (مثل Q55) (Q16-Q20)', en: '🔹 Section 4: Advanced Division (like Q55) (Q16-Q20)' },
+            questions: [
+                {
+                    q: { ar: '<strong>السؤال 16 (مثل السؤال 55):</strong> حوّل لأبسط صورة: <span class="math-display">(12a³b² - 8a²b + 4ab) / (4ab)</span>', en: '<strong>Question 16 (like Q55):</strong> Simplify: <span class="math-display">(12a³b² - 8a²b + 4ab) / (4ab)</span>' },
+                    svg: svgGraphs.q55_solution,
+                    options: [
+                        { ar: '<span class="math-display">3a²b - 2a + 1</span>', en: '<span class="math-display">3a²b - 2a + 1</span>' },
+                        { ar: '<span class="math-display">3a²b - 2ab + 1</span>', en: '<span class="math-display">3a²b - 2ab + 1</span>' },
+                        { ar: '<span class="math-display">3a²b - 2a</span>', en: '<span class="math-display">3a²b - 2a</span>' },
+                        { ar: '<span class="math-display">12a²b - 8a + 4</span>', en: '<span class="math-display">12a²b - 8a + 4</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '12a³b²÷4ab = 3a²b، -8a²b÷4ab = -2a، 4ab÷4ab = 1. الناتج: 3a²b - 2a + 1', en: '12a³b²÷4ab = 3a²b, -8a²b÷4ab = -2a, 4ab÷4ab = 1. Answer: 3a²b - 2a + 1' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 17:</strong> حوّل لأبسط صورة: <span class="math-display">(15x⁴y³ - 10x³y² + 5x²y) / (5x²y)</span>', en: '<strong>Question 17:</strong> Simplify: <span class="math-display">(15x⁴y³ - 10x³y² + 5x²y) / (5x²y)</span>' },
+                    options: [
+                        { ar: '<span class="math-display">3x²y² - 2xy + 1</span>', en: '<span class="math-display">3x²y² - 2xy + 1</span>' },
+                        { ar: '<span class="math-display">3x²y² - 2xy</span>', en: '<span class="math-display">3x²y² - 2xy</span>' },
+                        { ar: '<span class="math-display">15x²y² - 10xy + 5</span>', en: '<span class="math-display">15x²y² - 10xy + 5</span>' },
+                        { ar: '<span class="math-display">3x⁴y³ - 2x³y² + x²y</span>', en: '<span class="math-display">3x⁴y³ - 2x³y² + x²y</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '15x⁴y³÷5x²y = 3x²y²، -10x³y²÷5x²y = -2xy، 5x²y÷5x²y = 1. الناتج: 3x²y² - 2xy + 1', en: '15x⁴y³÷5x²y = 3x²y², -10x³y²÷5x²y = -2xy, 5x²y÷5x²y = 1. Answer: 3x²y² - 2xy + 1' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 18:</strong> حوّل لأبسط صورة: <span class="math-display">(28m⁵n⁴ - 21m⁴n³ + 14m³n²) / (7m³n²)</span>', en: '<strong>Question 18:</strong> Simplify: <span class="math-display">(28m⁵n⁴ - 21m⁴n³ + 14m³n²) / (7m³n²)</span>' },
+                    options: [
+                        { ar: '<span class="math-display">4m²n² - 3mn + 2</span>', en: '<span class="math-display">4m²n² - 3mn + 2</span>' },
+                        { ar: '<span class="math-display">4m²n² - 3mn</span>', en: '<span class="math-display">4m²n² - 3mn</span>' },
+                        { ar: '<span class="math-display">28m²n² - 21mn + 14</span>', en: '<span class="math-display">28m²n² - 21mn + 14</span>' },
+                        { ar: '<span class="math-display">4m⁵n⁴ - 3m⁴n³ + 2m³n²</span>', en: '<span class="math-display">4m⁵n⁴ - 3m⁴n³ + 2m³n²</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '28m⁵n⁴÷7m³n² = 4m²n²، -21m⁴n³÷7m³n² = -3mn، 14m³n²÷7m³n² = 2. الناتج: 4m²n² - 3mn + 2', en: '28m⁵n⁴÷7m³n² = 4m²n², -21m⁴n³÷7m³n² = -3mn, 14m³n²÷7m³n² = 2. Answer: 4m²n² - 3mn + 2' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 19:</strong> حوّل لأبسط صورة: <span class="math-display">(36p⁷q⁵ - 24p⁶q⁴ + 12p⁵q³) / (12p⁵q³)</span>', en: '<strong>Question 19:</strong> Simplify: <span class="math-display">(36p⁷q⁵ - 24p⁶q⁴ + 12p⁵q³) / (12p⁵q³)</span>' },
+                    options: [
+                        { ar: '<span class="math-display">3p²q² - 2pq + 1</span>', en: '<span class="math-display">3p²q² - 2pq + 1</span>' },
+                        { ar: '<span class="math-display">3p²q² - 2pq</span>', en: '<span class="math-display">3p²q² - 2pq</span>' },
+                        { ar: '<span class="math-display">36p²q² - 24pq + 12</span>', en: '<span class="math-display">36p²q² - 24pq + 12</span>' },
+                        { ar: '<span class="math-display">3p⁷q⁵ - 2p⁶q⁴ + p⁵q³</span>', en: '<span class="math-display">3p⁷q⁵ - 2p⁶q⁴ + p⁵q³</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '36p⁷q⁵÷12p⁵q³ = 3p²q²، -24p⁶q⁴÷12p⁵q³ = -2pq، 12p⁵q³÷12p⁵q³ = 1. الناتج: 3p²q² - 2pq + 1', en: '36p⁷q⁵÷12p⁵q³ = 3p²q², -24p⁶q⁴÷12p⁵q³ = -2pq, 12p⁵q³÷12p⁵q³ = 1. Answer: 3p²q² - 2pq + 1' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 20:</strong> حوّل لأبسط صورة: <span class="math-display">(40x⁸y⁶ - 30x⁷y⁵ + 20x⁶y⁴) / (10x⁶y⁴)</span>', en: '<strong>Question 20:</strong> Simplify: <span class="math-display">(40x⁸y⁶ - 30x⁷y⁵ + 20x⁶y⁴) / (10x⁶y⁴)</span>' },
+                    options: [
+                        { ar: '<span class="math-display">4x²y² - 3xy + 2</span>', en: '<span class="math-display">4x²y² - 3xy + 2</span>' },
+                        { ar: '<span class="math-display">4x²y² - 3xy</span>', en: '<span class="math-display">4x²y² - 3xy</span>' },
+                        { ar: '<span class="math-display">40x²y² - 30xy + 20</span>', en: '<span class="math-display">40x²y² - 30xy + 20</span>' },
+                        { ar: '<span class="math-display">4x⁸y⁶ - 3x⁷y⁵ + 2x⁶y⁴</span>', en: '<span class="math-display">4x⁸y⁶ - 3x⁷y⁵ + 2x⁶y⁴</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '40x⁸y⁶÷10x⁶y⁴ = 4x²y²، -30x⁷y⁵÷10x⁶y⁴ = -3xy، 20x⁶y⁴÷10x⁶y⁴ = 2. الناتج: 4x²y² - 3xy + 2', en: '40x⁸y⁶÷10x⁶y⁴ = 4x²y², -30x⁷y⁵÷10x⁶y⁴ = -3xy, 20x⁶y⁴÷10x⁶y⁴ = 2. Answer: 4x²y² - 3xy + 2' }
+                }
+            ]
+        },
+        {
+            id: 'sec5',
+            title: { ar: '🔹 القسم 5: مسائل مركبة (Q21-Q25)', en: '🔹 Section 5: Mixed Problems (Q21-Q25)' },
+            questions: [
+                {
+                    q: { ar: '<strong>السؤال 21:</strong> حوّل لأبسط صورة: <span class="math-display">(9x⁵y⁴ - 6x⁴y³ + 3x³y²) / (3x³y²)</span>', en: '<strong>Question 21:</strong> Simplify: <span class="math-display">(9x⁵y⁴ - 6x⁴y³ + 3x³y²) / (3x³y²)</span>' },
+                    svg: svgGraphs.division_steps,
+                    options: [
+                        { ar: '<span class="math-display">3x²y² - 2xy + 1</span>', en: '<span class="math-display">3x²y² - 2xy + 1</span>' },
+                        { ar: '<span class="math-display">3x²y² - 2xy</span>', en: '<span class="math-display">3x²y² - 2xy</span>' },
+                        { ar: '<span class="math-display">9x²y² - 6xy + 3</span>', en: '<span class="math-display">9x²y² - 6xy + 3</span>' },
+                        { ar: '<span class="math-display">3x⁵y⁴ - 2x⁴y³ + x³y²</span>', en: '<span class="math-display">3x⁵y⁴ - 2x⁴y³ + x³y²</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '9x⁵y⁴÷3x³y² = 3x²y²، -6x⁴y³÷3x³y² = -2xy، 3x³y²÷3x³y² = 1. الناتج: 3x²y² - 2xy + 1', en: '9x⁵y⁴÷3x³y² = 3x²y², -6x⁴y³÷3x³y² = -2xy, 3x³y²÷3x³y² = 1. Answer: 3x²y² - 2xy + 1' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 22:</strong> حوّل لأبسط صورة: <span class="math-display">(16a⁶b⁵ - 12a⁵b⁴ + 8a⁴b³) / (4a⁴b³)</span>', en: '<strong>Question 22:</strong> Simplify: <span class="math-display">(16a⁶b⁵ - 12a⁵b⁴ + 8a⁴b³) / (4a⁴b³)</span>' },
+                    options: [
+                        { ar: '<span class="math-display">4a²b² - 3ab + 2</span>', en: '<span class="math-display">4a²b² - 3ab + 2</span>' },
+                        { ar: '<span class="math-display">4a²b² - 3ab</span>', en: '<span class="math-display">4a²b² - 3ab</span>' },
+                        { ar: '<span class="math-display">16a²b² - 12ab + 8</span>', en: '<span class="math-display">16a²b² - 12ab + 8</span>' },
+                        { ar: '<span class="math-display">4a⁶b⁵ - 3a⁵b⁴ + 2a⁴b³</span>', en: '<span class="math-display">4a⁶b⁵ - 3a⁵b⁴ + 2a⁴b³</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '16a⁶b⁵÷4a⁴b³ = 4a²b²، -12a⁵b⁴÷4a⁴b³ = -3ab، 8a⁴b³÷4a⁴b³ = 2. الناتج: 4a²b² - 3ab + 2', en: '16a⁶b⁵÷4a⁴b³ = 4a²b², -12a⁵b⁴÷4a⁴b³ = -3ab, 8a⁴b³÷4a⁴b³ = 2. Answer: 4a²b² - 3ab + 2' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 23:</strong> حوّل لأبسط صورة: <span class="math-display">(25m⁷n⁶ - 20m⁶n⁵ + 15m⁵n⁴) / (5m⁵n⁴)</span>', en: '<strong>Question 23:</strong> Simplify: <span class="math-display">(25m⁷n⁶ - 20m⁶n⁵ + 15m⁵n⁴) / (5m⁵n⁴)</span>' },
+                    options: [
+                        { ar: '<span class="math-display">5m²n² - 4mn + 3</span>', en: '<span class="math-display">5m²n² - 4mn + 3</span>' },
+                        { ar: '<span class="math-display">5m²n² - 4mn</span>', en: '<span class="math-display">5m²n² - 4mn</span>' },
+                        { ar: '<span class="math-display">25m²n² - 20mn + 15</span>', en: '<span class="math-display">25m²n² - 20mn + 15</span>' },
+                        { ar: '<span class="math-display">5m⁷n⁶ - 4m⁶n⁵ + 3m⁵n⁴</span>', en: '<span class="math-display">5m⁷n⁶ - 4m⁶n⁵ + 3m⁵n⁴</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '25m⁷n⁶÷5m⁵n⁴ = 5m²n²، -20m⁶n⁵÷5m⁵n⁴ = -4mn، 15m⁵n⁴÷5m⁵n⁴ = 3. الناتج: 5m²n² - 4mn + 3', en: '25m⁷n⁶÷5m⁵n⁴ = 5m²n², -20m⁶n⁵÷5m⁵n⁴ = -4mn, 15m⁵n⁴÷5m⁵n⁴ = 3. Answer: 5m²n² - 4mn + 3' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 24:</strong> حوّل لأبسط صورة: <span class="math-display">(48x⁹y⁸ - 36x⁸y⁷ + 24x⁷y⁶) / (12x⁷y⁶)</span>', en: '<strong>Question 24:</strong> Simplify: <span class="math-display">(48x⁹y⁸ - 36x⁸y⁷ + 24x⁷y⁶) / (12x⁷y⁶)</span>' },
+                    options: [
+                        { ar: '<span class="math-display">4x²y² - 3xy + 2</span>', en: '<span class="math-display">4x²y² - 3xy + 2</span>' },
+                        { ar: '<span class="math-display">4x²y² - 3xy</span>', en: '<span class="math-display">4x²y² - 3xy</span>' },
+                        { ar: '<span class="math-display">48x²y² - 36xy + 24</span>', en: '<span class="math-display">48x²y² - 36xy + 24</span>' },
+                        { ar: '<span class="math-display">4x⁹y⁸ - 3x⁸y⁷ + 2x⁷y⁶</span>', en: '<span class="math-display">4x⁹y⁸ - 3x⁸y⁷ + 2x⁷y⁶</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '48x⁹y⁸÷12x⁷y⁶ = 4x²y²، -36x⁸y⁷÷12x⁷y⁶ = -3xy، 24x⁷y⁶÷12x⁷y⁶ = 2. الناتج: 4x²y² - 3xy + 2', en: '48x⁹y⁸÷12x⁷y⁶ = 4x²y², -36x⁸y⁷÷12x⁷y⁶ = -3xy, 24x⁷y⁶÷12x⁷y⁶ = 2. Answer: 4x²y² - 3xy + 2' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 25:</strong> حوّل لأبسط صورة: <span class="math-display">(50a⁸b⁷ - 35a⁷b⁶ + 25a⁶b⁵) / (5a⁶b⁵)</span>', en: '<strong>Question 25:</strong> Simplify: <span class="math-display">(50a⁸b⁷ - 35a⁷b⁶ + 25a⁶b⁵) / (5a⁶b⁵)</span>' },
+                    options: [
+                        { ar: '<span class="math-display">10a²b² - 7ab + 5</span>', en: '<span class="math-display">10a²b² - 7ab + 5</span>' },
+                        { ar: '<span class="math-display">10a²b² - 7ab</span>', en: '<span class="math-display">10a²b² - 7ab</span>' },
+                        { ar: '<span class="math-display">50a²b² - 35ab + 25</span>', en: '<span class="math-display">50a²b² - 35ab + 25</span>' },
+                        { ar: '<span class="math-display">10a⁸b⁷ - 7a⁷b⁶ + 5a⁶b⁵</span>', en: '<span class="math-display">10a⁸b⁷ - 7a⁷b⁶ + 5a⁶b⁵</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '50a⁸b⁷÷5a⁶b⁵ = 10a²b²، -35a⁷b⁶÷5a⁶b⁵ = -7ab، 25a⁶b⁵÷5a⁶b⁵ = 5. الناتج: 10a²b² - 7ab + 5', en: '50a⁸b⁷÷5a⁶b⁵ = 10a²b², -35a⁷b⁶÷5a⁶b⁵ = -7ab, 25a⁶b⁵÷5a⁶b⁵ = 5. Answer: 10a²b² - 7ab + 5' }
+                }
+            ]
+        },
+        {
+            id: 'sec6',
+            title: { ar: '🔹 القسم 6: مسائل متقدمة وتطبيقات (Q26-Q30)', en: '🔹 Section 6: Advanced Problems & Applications (Q26-Q30)' },
+            questions: [
+                {
+                    q: { ar: '<strong>السؤال 26:</strong> حوّل لأبسط صورة: <span class="math-display">(14x⁵y⁴z³ - 21x⁴y³z² + 7x³y²z) / (7x³y²z)</span>', en: '<strong>Question 26:</strong> Simplify: <span class="math-display">(14x⁵y⁴z³ - 21x⁴y³z² + 7x³y²z) / (7x³y²z)</span>' },
+                    svg: svgGraphs.exponent_rules,
+                    options: [
+                        { ar: '<span class="math-display">2x²y²z² - 3xyz + 1</span>', en: '<span class="math-display">2x²y²z² - 3xyz + 1</span>' },
+                        { ar: '<span class="math-display">2x²y²z² - 3xyz</span>', en: '<span class="math-display">2x²y²z² - 3xyz</span>' },
+                        { ar: '<span class="math-display">14x²y²z² - 21xyz + 7</span>', en: '<span class="math-display">14x²y²z² - 21xyz + 7</span>' },
+                        { ar: '<span class="math-display">2x⁵y⁴z³ - 3x⁴y³z² + x³y²z</span>', en: '<span class="math-display">2x⁵y⁴z³ - 3x⁴y³z² + x³y²z</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '14x⁵y⁴z³÷7x³y²z = 2x²y²z²، -21x⁴y³z²÷7x³y²z = -3xyz، 7x³y²z÷7x³y²z = 1. الناتج: 2x²y²z² - 3xyz + 1', en: '14x⁵y⁴z³÷7x³y²z = 2x²y²z², -21x⁴y³z²÷7x³y²z = -3xyz, 7x³y²z÷7x³y²z = 1. Answer: 2x²y²z² - 3xyz + 1' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 27:</strong> حوّل لأبسط صورة: <span class="math-display">(32m⁶n⁵p⁴ - 24m⁵n⁴p³ + 16m⁴n³p²) / (8m⁴n³p²)</span>', en: '<strong>Question 27:</strong> Simplify: <span class="math-display">(32m⁶n⁵p⁴ - 24m⁵n⁴p³ + 16m⁴n³p²) / (8m⁴n³p²)</span>' },
+                    options: [
+                        { ar: '<span class="math-display">4m²n²p² - 3mnp + 2</span>', en: '<span class="math-display">4m²n²p² - 3mnp + 2</span>' },
+                        { ar: '<span class="math-display">4m²n²p² - 3mnp</span>', en: '<span class="math-display">4m²n²p² - 3mnp</span>' },
+                        { ar: '<span class="math-display">32m²n²p² - 24mnp + 16</span>', en: '<span class="math-display">32m²n²p² - 24mnp + 16</span>' },
+                        { ar: '<span class="math-display">4m⁶n⁵p⁴ - 3m⁵n⁴p³ + 2m⁴n³p²</span>', en: '<span class="math-display">4m⁶n⁵p⁴ - 3m⁵n⁴p³ + 2m⁴n³p²</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '32m⁶n⁵p⁴÷8m⁴n³p² = 4m²n²p²، -24m⁵n⁴p³÷8m⁴n³p² = -3mnp، 16m⁴n³p²÷8m⁴n³p² = 2. الناتج: 4m²n²p² - 3mnp + 2', en: '32m⁶n⁵p⁴÷8m⁴n³p² = 4m²n²p², -24m⁵n⁴p³÷8m⁴n³p² = -3mnp, 16m⁴n³p²÷8m⁴n³p² = 2. Answer: 4m²n²p² - 3mnp + 2' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 28:</strong> حوّل لأبسط صورة: <span class="math-display">(45x⁷y⁶ - 30x⁶y⁵ + 15x⁵y⁴)(15x⁵y⁴)⁻¹</span>', en: '<strong>Question 28:</strong> Simplify: <span class="math-display">(45x⁷y⁶ - 30x⁶y⁵ + 15x⁵y⁴)(15x⁵y⁴)⁻¹</span>' },
+                    options: [
+                        { ar: '<span class="math-display">3x²y² - 2xy + 1</span>', en: '<span class="math-display">3x²y² - 2xy + 1</span>' },
+                        { ar: '<span class="math-display">3x²y² - 2xy</span>', en: '<span class="math-display">3x²y² - 2xy</span>' },
+                        { ar: '<span class="math-display">45x²y² - 30xy + 15</span>', en: '<span class="math-display">45x²y² - 30xy + 15</span>' },
+                        { ar: '<span class="math-display">3x⁷y⁶ - 2x⁶y⁵ + x⁵y⁴</span>', en: '<span class="math-display">3x⁷y⁶ - 2x⁶y⁵ + x⁵y⁴</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '(15x⁵y⁴)⁻¹ = 1/(15x⁵y⁴). 45x⁷y⁶/(15x⁵y⁴) = 3x²y²، -30x⁶y⁵/(15x⁵y⁴) = -2xy، 15x⁵y⁴/(15x⁵y⁴) = 1. الناتج: 3x²y² - 2xy + 1', en: '(15x⁵y⁴)⁻¹ = 1/(15x⁵y⁴). 45x⁷y⁶/(15x⁵y⁴) = 3x²y², -30x⁶y⁵/(15x⁵y⁴) = -2xy, 15x⁵y⁴/(15x⁵y⁴) = 1. Answer: 3x²y² - 2xy + 1' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 29:</strong> حوّل لأبسط صورة: <span class="math-display">(56a⁹b⁸c⁷ - 42a⁸b⁷c⁶ + 28a⁷b⁶c⁵) / (14a⁷b⁶c⁵)</span>', en: '<strong>Question 29:</strong> Simplify: <span class="math-display">(56a⁹b⁸c⁷ - 42a⁸b⁷c⁶ + 28a⁷b⁶c⁵) / (14a⁷b⁶c⁵)</span>' },
+                    options: [
+                        { ar: '<span class="math-display">4a²b²c² - 3abc + 2</span>', en: '<span class="math-display">4a²b²c² - 3abc + 2</span>' },
+                        { ar: '<span class="math-display">4a²b²c² - 3abc</span>', en: '<span class="math-display">4a²b²c² - 3abc</span>' },
+                        { ar: '<span class="math-display">56a²b²c² - 42abc + 28</span>', en: '<span class="math-display">56a²b²c² - 42abc + 28</span>' },
+                        { ar: '<span class="math-display">4a⁹b⁸c⁷ - 3a⁸b⁷c⁶ + 2a⁷b⁶c⁵</span>', en: '<span class="math-display">4a⁹b⁸c⁷ - 3a⁸b⁷c⁶ + 2a⁷b⁶c⁵</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '56a⁹b⁸c⁷÷14a⁷b⁶c⁵ = 4a²b²c²، -42a⁸b⁷c⁶÷14a⁷b⁶c⁵ = -3abc، 28a⁷b⁶c⁵÷14a⁷b⁶c⁵ = 2. الناتج: 4a²b²c² - 3abc + 2', en: '56a⁹b⁸c⁷÷14a⁷b⁶c⁵ = 4a²b²c², -42a⁸b⁷c⁶÷14a⁷b⁶c⁵ = -3abc, 28a⁷b⁶c⁵÷14a⁷b⁶c⁵ = 2. Answer: 4a²b²c² - 3abc + 2' }
+                },
+                {
+                    q: { ar: '<strong>السؤال 30:</strong> أي عبارة تصف بشكل صحيح قاعدة قسمة كثير الحدود على وحيد الحد؟', en: '<strong>Question 30:</strong> Which statement correctly describes the rule for dividing a polynomial by a monomial?' },
+                    svg: svgGraphs.common_mistakes,
+                    options: [
+                        { ar: 'نقسم كل حد من كثير الحدود على وحيد الحد', en: 'Divide each term of the polynomial by the monomial' },
+                        { ar: 'نقسم الحد الأول فقط على وحيد الحد', en: 'Divide only the first term by the monomial' },
+                        { ar: 'نطرح وحيد الحد من كل حد', en: 'Subtract the monomial from each term' },
+                        { ar: 'نضرب كل حد في وحيد الحد', en: 'Multiply each term by the monomial' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'القاعدة الصحيحة: (a + b + c) ÷ d = a/d + b/d + c/d. نقسم كل حد من كثير الحدود على وحيد الحد', en: 'Correct rule: (a + b + c) ÷ d = a/d + b/d + c/d. Divide each term of the polynomial by the monomial' }
+                }
+            ]
+        }
+    ]
+};
+
+function shuffleArray(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+function prepareShuffledExam() {
+    rng = mulberry32(currentSeed);
+    examData = JSON.parse(JSON.stringify(originalExamData));
+    correctAnswersMap = {};
+    let globalIdx = 0;
+    examData.sections.forEach((section) => {
+        section.questions = shuffleArray(section.questions);
+        section.questions.forEach((q) => {
+            const optionsWithCorrect = q.options.map((opt, idx) => ({ option: opt, isCorrect: idx === q.correct }));
+            const shuffledOptions = shuffleArray(optionsWithCorrect);
+            q.options = shuffledOptions.map(o => o.option);
+            q.correct = shuffledOptions.findIndex(o => o.isCorrect);
+            correctAnswersMap[globalIdx] = String.fromCharCode(97 + q.correct);
+            globalIdx++;
+        });
+    });
+}
+
+function reshuffleExam() {
+    const msg = currentLang === 'ar' ? '🔄 سيتم إنشاء أسئلة جديدة ومسح إجاباتك. هل أنت متأكد؟' : '🔄 New questions will be generated. Are you sure?';
+    if (confirm(msg)) {
+        currentSeed = Date.now(); timeRemaining = TOTAL_TIME; answersVisible = false;
+        prepareShuffledExam(); renderExam(); saveState();
+        alert(currentLang === 'ar' ? '🎲 تم تغيير الأسئلة! حظاً موفقاً! 🍀' : '🎲 Questions changed! Good luck! 🍀');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+function setLanguage(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.body.classList.toggle('en-mode', lang === 'en');
+    
+    document.querySelectorAll('[data-ar]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + lang);
+    });
+    
+    document.querySelectorAll('[data-placeholder-ar]').forEach(el => {
+        el.placeholder = el.getAttribute('data-placeholder-' + lang);
+    });
+    
+    renderExam(); saveState(false);
+}
+
+function renderExam() {
+    const container = document.getElementById('exam-content');
+    const labels = { ar: { option: ['a)', 'b)', 'c)', 'd)'], answer: '✅ الإجابة:' }, en: { option: ['a)', 'b)', 'c)', 'd)'], answer: '✅ Answer:' } };
+    const lbl = labels[currentLang];
+    let html = '';
+    let globalIdx = 0;
+    
+    examData.sections.forEach((section, secIdx) => {
+        const badgeClass = ['module-1', 'module-2', 'module-3', 'module-4', 'module-5', 'module-6'][secIdx];
+        html += '<section class="bg-white p-6 rounded-2xl shadow-lg border-2 border-amber-100">';
+        html += '<div class="text-center mb-4"><span class="module-badge ' + badgeClass + '">' + section.title[currentLang] + '</span></div>';
+        html += '<ol class="space-y-4 text-sm">';
+        
+        section.questions.forEach((q) => {
+            html += '<li class="border-r-4 border-amber-400 pr-4 py-2" id="q-' + globalIdx + '" style="border-right: 4px solid #d97706; padding-right: 1rem;">';
+            html += '<strong class="text-amber-700">' + (globalIdx + 1) + '.</strong> ' + q.q[currentLang] + '<br>';
+            if (q.svg) html += '<div class="graph-container">' + q.svg + '</div>';
+            
+            q.options.forEach((opt, oIdx) => {
+                html += '<label class="cursor-pointer block mt-2 mr-4 hover:bg-amber-50 rounded-lg p-2 transition" style="margin-right: 1rem;">';
+                html += '<input type="radio" name="q' + globalIdx + '" value="' + String.fromCharCode(97 + oIdx) + '" class="mr-2 ml-2">';
+                html += '<span class="arabic-math">' + lbl.option[oIdx] + ' ' + opt[currentLang] + '</span>';
+                html += '</label>';
+            });
+            
+            html += '<div class="answer-box text-green-700 mt-3 font-medium ' + (answersVisible ? '' : 'hidden') + ' bg-green-50 rounded-lg p-3 border border-green-200">';
+            html += lbl.answer + ' ' + lbl.option[q.correct] + ' <span class="arabic-math">' + q.options[q.correct][currentLang] + '</span><br>';
+            html += '<span class="text-sm text-green-700 mt-2 block arabic-math">' + q.answer[currentLang] + '</span>';
+            html += '</div></li>';
+            globalIdx++;
+        });
+        
+        html += '</ol></section>';
+    });
+    
+    container.innerHTML = html;
+}
+
+function startTimer() {
+    updateTimerDisplay();
+    timerInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerDisplay();
+        if (timeRemaining % 60 === 0) saveState(false);
+        if (timeRemaining <= 600) document.getElementById('timer').classList.add('timer-warning');
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            alert(currentLang === 'ar' ? "⏰ انتهى الوقت!" : "⏰ Time's up!");
+            gradeExam();
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const m = Math.floor(timeRemaining / 60);
+    const s = timeRemaining % 60;
+    document.getElementById('timer').textContent = m.toString().padStart(2,'0') + ':' + s.toString().padStart(2,'0');
+}
+
+function toggleAnswers() {
+    answersVisible = !answersVisible;
+    document.querySelectorAll('.answer-box').forEach(el => el.classList.toggle('hidden', !answersVisible));
+    saveState(false);
+}
+
+function gradeExam() {
+    let correctCount = 0;
+    const sectionScores = new Array(TOTAL_SECTIONS).fill(0);
+    
+    for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+        const sel = document.querySelector('input[name="q'+i+'"]:checked');
+        const li = document.getElementById('q-' + i);
+        if (li) {
+            const isCorrect = sel && sel.value === correctAnswersMap[i];
+            if (isCorrect) {
+                correctCount++;
+                li.classList.add('correct');
+                li.classList.remove('incorrect');
+                sectionScores[Math.floor(i / QUESTIONS_PER_SECTION)]++;
+            } else {
+                li.classList.add('incorrect');
+                li.classList.remove('correct');
+            }
+        }
+    }
+    
+    const score = Math.round((correctCount / TOTAL_QUESTIONS) * 100);
+    document.getElementById('res-total').textContent = score + ' / 100';
+    document.getElementById('res-name').textContent = document.getElementById('studentName').value || (currentLang === 'ar' ? 'بطل' : 'Champion');
+    document.getElementById('res-date').textContent = new Date().toLocaleDateString(currentLang === 'ar' ? 'ar-AE' : 'en-US');
+    
+    const pc = document.getElementById('sections-performance');
+    pc.innerHTML = '';
+    examData.sections.forEach((s, idx) => {
+        pc.innerHTML += '<div class="flex justify-between items-center p-3 bg-white rounded-lg"><span class="text-gray-700">' + s.title[currentLang] + '</span><span class="font-bold text-amber-700">' + sectionScores[idx] + '/' + QUESTIONS_PER_SECTION + '</span></div>';
+    });
+    
+    const badge = document.getElementById('success-badge');
+    document.getElementById('success-percent').textContent = score + '%';
+    
+    if (currentLang === 'ar') {
+        if (score >= 90) { badge.textContent = '🌟 ممتاز جداً!'; badge.className = 'success-badge grade-excellent'; }
+        else if (score >= 75) { badge.textContent = '👏 ممتاز!'; badge.className = 'success-badge grade-good'; }
+        else if (score >= 50) { badge.textContent = '👍 جيد'; badge.className = 'success-badge grade-pass'; }
+        else { badge.textContent = '💪 حاول مرة أخرى'; badge.className = 'success-badge grade-fail'; }
+    } else {
+        if (score >= 90) { badge.textContent = '🌟 Outstanding!'; badge.className = 'success-badge grade-excellent'; }
+        else if (score >= 75) { badge.textContent = '👏 Excellent!'; badge.className = 'success-badge grade-good'; }
+        else if (score >= 50) { badge.textContent = '👍 Good'; badge.className = 'success-badge grade-pass'; }
+        else { badge.textContent = '💪 Try Again'; badge.className = 'success-badge grade-fail'; }
+    }
+    
+    document.getElementById('results-panel').classList.remove('hidden');
+    document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth' });
+    if (timerInterval) clearInterval(timerInterval);
+}
+
+function sendResultsToEmail() {
+    const btn = document.getElementById('sendEmailBtn');
+    const status = document.getElementById('emailStatus');
+    btn.disabled = true;
+    btn.textContent = currentLang === 'ar' ? '⏳ جاري الإرسال...' : '⏳ Sending...';
+    
+    const name = document.getElementById('studentName').value || 'N/A';
+    const studentClass = document.getElementById('studentClass').value || 'N/A';
+    const date = document.getElementById('examDate').value || new Date().toLocaleDateString();
+    const score = document.getElementById('res-total').textContent;
+    const successRate = document.getElementById('success-percent').textContent;
+    const badge = document.getElementById('success-badge').textContent;
+    
+    let questionsHTML = '<div style="font-family:Arial; direction:rtl;">';
+    questionsHTML += '<h2>📐 ' + (currentLang === 'ar' ? 'نتيجة امتحان قسمة كثيرات الحدود' : 'Dividing Polynomials Exam Result') + '</h2>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'الاسم' : 'Name') + ':</strong> ' + name + '</p>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'الشعبة' : 'Class') + ':</strong> ' + studentClass + '</p>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'التاريخ' : 'Date') + ':</strong> ' + date + '</p>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'الدرجة' : 'Score') + ':</strong> ' + score + ' (' + successRate + '%)</p>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'التقدير' : 'Grade') + ':</strong> ' + badge + '</p>';
+    questionsHTML += '<hr><h3>' + (currentLang === 'ar' ? 'تفاصيل الإجابات:' : 'Answer Details:') + '</h3><table style="width:100%; border-collapse:collapse;">';
+    questionsHTML += '<tr style="background:#d97706; color:white;"><th style="padding:8px; border:1px solid #ddd;">#</th><th style="padding:8px; border:1px solid #ddd;">' + (currentLang === 'ar' ? 'السؤال' : 'Question') + '</th><th style="padding:8px; border:1px solid #ddd;">' + (currentLang === 'ar' ? 'إجابة الطالب' : 'Student Answer') + '</th><th style="padding:8px; border:1px solid #ddd;">' + (currentLang === 'ar' ? 'الصحيحة' : 'Correct') + '</th><th style="padding:8px; border:1px solid #ddd;">' + (currentLang === 'ar' ? 'النتيجة' : 'Result') + '</th></tr>';
+    
+    let globalIdx = 0;
+    examData.sections.forEach((section) => {
+        questionsHTML += '<tr style="background:#fef3c7;"><td colspan="5" style="padding:8px; font-weight:bold; border:1px solid #ddd;">' + section.title.ar + '</td></tr>';
+        section.questions.forEach((q) => {
+            const sel = document.querySelector('input[name="q'+globalIdx+'"]:checked');
+            const sv = sel ? sel.value : null;
+            const cv = correctAnswersMap[globalIdx];
+            const ic = sv === cv;
+            let sat = currentLang === 'ar' ? '❌ لم يجب' : '❌ No answer';
+            let sac = '#dc2626';
+            if (sv) {
+                const si = sv.charCodeAt(0) - 97;
+                sat = q.options[si][currentLang];
+                sac = ic ? '#16a34a' : '#dc2626';
+            }
+            const cat = q.options[q.correct][currentLang];
+            const rb = ic ? '#f0fdf4' : '#fef2f2';
+            questionsHTML += '<tr style="background:' + rb + ';"><td style="padding:8px; border:1px solid #ddd; text-align:center;">' + (globalIdx+1) + '</td><td style="padding:8px; border:1px solid #ddd;">' + q.q.ar.replace(/<[^>]+>/g, '').substring(0, 80) + '...</td><td style="padding:8px; border:1px solid #ddd; color:' + sac + ';">' + sat + '</td><td style="padding:8px; border:1px solid #ddd; color:#16a34a;">' + cat + '</td><td style="padding:8px; border:1px solid #ddd; text-align:center;">' + (ic?'✅':'❌') + '</td></tr>';
+            globalIdx++;
+        });
+    });
+    questionsHTML += '</table></div>';
+    
+    const templateParams = {
+        to_email: TARGET_EMAIL,
+        student_name: name,
+        student_class: studentClass,
+        exam_date: date,
+        total_score: score,
+        success_rate: successRate,
+        grade: badge,
+        answers_table: questionsHTML
+    };
+    
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+        .then(() => {
+            status.textContent = currentLang === 'ar' ? '✅ تم الإرسال بنجاح!' : '✅ Sent successfully!';
+            status.style.color = '#16a34a';
+            btn.textContent = currentLang === 'ar' ? '✓ تم' : '✓ Sent';
+            alert(currentLang === 'ar' ? 'تم إرسال النتيجة للمعلم بنجاح!' : 'Result sent to teacher successfully!');
+        })
+        .catch((error) => {
+            status.textContent = currentLang === 'ar' ? '❌ فشل الإرسال' : '❌ Failed to send';
+            status.style.color = '#dc2626';
+            btn.disabled = false;
+            btn.textContent = currentLang === 'ar' ? '📧 حاول مرة أخرى' : '📧 Try Again';
+            alert(currentLang === 'ar' ? 'فشل الإرسال: ' + error.text : 'Failed: ' + error.text);
+        });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const saved = loadState();
+    if (saved && saved.seed) {
+        currentSeed = saved.seed;
+        currentLang = saved.lang || 'ar';
+        timeRemaining = saved.timeRemaining !== undefined ? saved.timeRemaining : TOTAL_TIME;
+        answersVisible = saved.answersVisible || false;
+    } else {
+        currentSeed = Date.now();
+    }
+    
+    document.getElementById('btn-ar').classList.toggle('active', currentLang === 'ar');
+    document.getElementById('btn-en').classList.toggle('active', currentLang === 'en');
+    document.body.classList.toggle('en-mode', currentLang === 'en');
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+    
+    document.querySelectorAll('[data-ar]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + currentLang);
+    });
+    
+    document.querySelectorAll('[data-placeholder-ar]').forEach(el => {
+        el.placeholder = el.getAttribute('data-placeholder-' + currentLang);
+    });
+    
+    prepareShuffledExam();
+    renderExam();
+    if (saved) {
+        if (saved.studentName) document.getElementById('studentName').value = saved.studentName;
+        if (saved.studentClass) document.getElementById('studentClass').value = saved.studentClass;
+        if (saved.examDate) document.getElementById('examDate').value = saved.examDate;
+        if (saved.answers) restoreAnswers(saved.answers);
+    }
+    setupAnswerListeners();
+    setupInputListeners();
+    startTimer();
+});
+window.addEventListener('beforeunload', () => saveState(false));
+</script>
+</body>
+</html>
